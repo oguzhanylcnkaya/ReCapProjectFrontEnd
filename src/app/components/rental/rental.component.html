@@ -1,0 +1,20 @@
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Marka Adı</th>
+            <th>Ad Soyad</th>
+            <th>Kiralama Tarihi</th>
+            <th>Teslim Tarihi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let rental of rentals">
+            <td> {{rental.id}} </td>
+            <td> {{rental.brandName}} </td>
+            <td> {{rental.fullName}} </td>
+            <td> {{rental.rentDate}} </td>
+            <td> {{rental.returnDate}} </td>
+        </tr>
+    </tbody>
+</table>
