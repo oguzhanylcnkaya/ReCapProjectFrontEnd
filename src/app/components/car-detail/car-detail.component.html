@@ -1,0 +1,15 @@
+<ul *ngIf="carDetail">
+    <div>
+
+    </div>
+    <li>{{carDetail.id}}</li>
+    <li>{{carDetail.brandName}}</li>
+    <li>{{carDetail.colorName}}</li>
+    <li>{{carDetail.dailyPrice}}</li>
+    <li>{{carDetail.description}}</li>
+    <li>{{carDetail.modelYear}}</li>
+</ul>
+
+<div *ngFor="let image of carImages">
+    <img src="{{carImageBasePath}}{{image.imagePath}}" alt="">
+</div>

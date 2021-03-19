@@ -1,14 +1,11 @@
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let color of colors">
-            <td>{{color.id}}</td>
-            <td>{{color.name}}</td>
-        </tr>
-    </tbody>
-</table>
+<ul class="list-group mt-4">
+    <li
+    [class]="getAllColorClass()"
+    routerLink="/cars"
+    >Tüm Renkler</li>
+    <li  
+    [class]="getCurrentClass(color)"
+    (click)="setCurrentColor(color)"
+    routerLink="/cars/color/{{color.id}}"
+    *ngFor="let color of colors">{{color.name}}</li>
+</ul>

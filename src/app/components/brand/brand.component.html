@@ -1,14 +1,15 @@
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let brand of brands">
-            <td>{{brand.id}}</td>
-            <td>{{brand.name}}</td>
-        </tr>
-    </tbody>
-</table>
+<!-- <div>
+    <input type="text" [(ngModel)]="filterBrand" >
+</div> -->
+
+<ul class="list-group">
+    <li
+        [class]="getAllBrandsClass()"
+        routerLink="/cars"
+    >Tüm Markalar</li>
+    <li 
+    (click)="setCurrentBrand(brand)"
+    [class]="getCurrentBrand(brand)" 
+    routerLink="/cars/brand/{{brand.id}}"
+    *ngFor="let brand of brands">{{brand.name}}</li>
+</ul>

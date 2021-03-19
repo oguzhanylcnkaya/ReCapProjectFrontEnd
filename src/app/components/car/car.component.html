@@ -1,4 +1,4 @@
-<table>
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Id</th>
@@ -10,7 +10,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let car of cars">
+        <tr 
+        routerLink="/cars/detail/{{car.id}}"
+        *ngFor="let car of cars">
             <td>{{car.id}}</td>
             <td>{{car.brandName}}</td>
             <td>{{car.colorName}}</td>
