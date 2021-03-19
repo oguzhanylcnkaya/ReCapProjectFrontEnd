@@ -1,4 +1,8 @@
-<ul class="list-group mt-4">
+<div class="my-4">
+    <input placeholder="Renk Ara" type="text" class="form-control" [(ngModel)]="colorFilter">
+</div>
+
+<ul class="list-group">
     <li
     [class]="getAllColorClass()"
     routerLink="/cars"
@@ -7,5 +11,5 @@
     [class]="getCurrentClass(color)"
     (click)="setCurrentColor(color)"
     routerLink="/cars/color/{{color.id}}"
-    *ngFor="let color of colors">{{color.name}}</li>
+    *ngFor="let color of colors | colorFilterPipe:colorFilter">{{color.name}}</li>
 </ul>

@@ -1,0 +1,18 @@
+.z-index-10{
+    z-index: 10;
+}
+
+.table-animations{
+    position: relative;
+    animation: animate 4s;
+}
+
+@keyframes animate{
+    0%{
+        top: -300px;
+    }
+
+    100%{
+        top: 0;
+    }
+}

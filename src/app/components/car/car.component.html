@@ -1,24 +1,28 @@
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Marka Adı</th>
-            <th>Renk Adı</th>
-            <th>Model Yılı</th>
-            <th>Günlük Fiyat</th>
-            <th>Açıklama</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr 
-        routerLink="/cars/detail/{{car.id}}"
-        *ngFor="let car of cars">
-            <td>{{car.id}}</td>
-            <td>{{car.brandName}}</td>
-            <td>{{car.colorName}}</td>
-            <td>{{car.modelYear}}</td>
-            <td>{{car.dailyPrice}}</td>
-            <td>{{car.description}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="row ml-0 mr-0">
+    <div class="col-md-6"></div>
+    <div class="col-md-6">
+        <input type="text" [(ngModel)]="carNameFilter" placeholder="Araba Adı Ara" class="form-control mt-4">
+    </div>
+</div>
+
+<div class="row ml-0 mr-0">
+    <div *ngFor="let car of cars | carFilterPipe:carNameFilter" class="col-md-4 my-4">
+        <div  class="card" style="width: 100%;">
+            <img src="{{carImageBasePath}}{{getCarImage(car)}}" class="card-img-top" alt="Araba Resmi">
+            <div class="card-body">
+              <h5 class="card-title text-center">{{car.carName}}</h5>
+              <hr>
+              <p> <b>Marka :</b> {{car.brandName}} </p>
+              <hr>
+              <p> <b>Model Yılı :</b> {{car.modelYear | date:" y"}} </p>
+              <hr>
+              <p> <b>Günlük Fiyatı :</b> {{car.dailyPrice | currency:'TRY':'₺ ': '3.0'}} </p>
+              <hr>
+              <p> <b>Renk :</b> {{car.colorName}} </p>
+              <hr>
+              <a routerLink="/cars/detail/{{car.id}}" class="btn btn-outline-dark mt-2">Detay</a>
+            </div>
+          </div>
+    </div>
+</div>
+

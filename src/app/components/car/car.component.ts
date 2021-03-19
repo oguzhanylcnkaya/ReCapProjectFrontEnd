@@ -11,6 +11,9 @@ import { CarService } from 'src/app/services/car.service';
 export class CarComponent implements OnInit {
 
   cars : Car[] = [];
+  carImageBasePath = "https://localhost:44306/images/";
+  carNameFilter = "";
+
   constructor(private carService: CarService,
     private activatedRoute: ActivatedRoute) { }
 
@@ -49,6 +52,16 @@ export class CarComponent implements OnInit {
       .subscribe((response) => {
         this.cars = response.data;
       });
+  }
+
+  getCarImage(car:Car){
+
+    if(car.imagePath){
+      return car.imagePath
+    }
+    else{
+      return 'default.jpg'
+    }
   }
 
 }

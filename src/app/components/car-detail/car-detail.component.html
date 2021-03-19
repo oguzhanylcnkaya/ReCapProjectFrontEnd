@@ -1,15 +1,53 @@
-<ul *ngIf="carDetail">
-    <div>
-
+<div class="row mt-4 ml-0 mr-0">
+    <div class="col-md-8 offset-md-2">
+        <div id="carouselExampleIndicators" class="carousel slide z-index-10" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner ">
+              <div *ngFor="let image of carImages let index = index" [ngClass]="sliderItemActive(index)" >
+                <img class="d-block  w-100" src="{{carImageBasePath}}{{image.imagePath}}" alt="First slide">
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+        </div>
     </div>
-    <li>{{carDetail.id}}</li>
-    <li>{{carDetail.brandName}}</li>
-    <li>{{carDetail.colorName}}</li>
-    <li>{{carDetail.dailyPrice}}</li>
-    <li>{{carDetail.description}}</li>
-    <li>{{carDetail.modelYear}}</li>
-</ul>
-
-<div *ngFor="let image of carImages">
-    <img src="{{carImageBasePath}}{{image.imagePath}}" alt="">
 </div>
+
+<div class="row ml-0 mr-0">
+    <div class="col-md-8 offset-md-2 table-animations">
+        <div *ngIf="carDetail" class="mt-4">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Marka :</th>
+                    <td>{{carDetail.brandName}}</td>
+                </tr>
+                <tr>
+                    <th>Renk :</th>
+                    <td>{{carDetail.colorName}}</td>
+                </tr>
+                <tr>
+                    <th>Kiralama Fiyatı :</th>
+                    <td>{{carDetail.dailyPrice}}</td>
+                </tr>
+                <tr>
+                    <th>Model Yılı :</th>
+                    <td>{{carDetail.modelYear}}</td>
+                </tr>
+                <tr>
+                    <th>Açıklama :</th>
+                    <td>{{carDetail.description}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
