@@ -1,15 +1,28 @@
-<div class="my-4">
+<div class="my-4 d-flex">
     <input type="text" [(ngModel)]="filterBrand" class="form-control" placeholder="Marka Ara" >
+    <button 
+        routerLink="/brand/add"
+        class="btn btn-outline-success"> 
+        <span>+</span></button>
 </div>
+
 
 <ul class="list-group">
     <li
+        class="add-brand"
         [class]="getAllBrandsClass()"
         routerLink="/cars"
-    >Tüm Markalar</li>
-    <li 
+    >Tüm Markalar
+    </li>
+    <span 
+    class="sidebar-grid"
+    *ngFor="let brand of brands | brandFilterPipe:filterBrand">
+        <li 
     (click)="setCurrentBrand(brand)"
     [class]="getCurrentBrand(brand)" 
-    routerLink="/cars/brand/{{brand.id}}"
-    *ngFor="let brand of brands | brandFilterPipe:filterBrand">{{brand.name}}</li>
+    routerLink="/cars/brand/{{brand.id}}">{{brand.name}} </li>
+    <button 
+    routerLink="/brand/update/{{brand.id}}"
+    class="btn btn-outline-primary"><i class="fas fa-pencil-alt"></i></button>
+    </span>
 </ul>

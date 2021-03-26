@@ -1,5 +1,8 @@
-<div class="my-4">
+<div class="my-4 d-flex">
     <input placeholder="Renk Ara" type="text" class="form-control" [(ngModel)]="colorFilter">
+    <button 
+    routerLink="/color/add"
+    class="btn btn-outline-success"><span>+</span></button>
 </div>
 
 <ul class="list-group">
@@ -7,9 +10,18 @@
     [class]="getAllColorClass()"
     routerLink="/cars"
     >Tüm Renkler</li>
-    <li  
+    <span
+    class="sidebar-grid"
+    *ngFor="let color of colors | colorFilterPipe:colorFilter"
+    >
+         <li  
     [class]="getCurrentClass(color)"
     (click)="setCurrentColor(color)"
     routerLink="/cars/color/{{color.id}}"
-    *ngFor="let color of colors | colorFilterPipe:colorFilter">{{color.name}}</li>
+    >{{color.name}}</li>
+    <button 
+    routerLink="/color/update/{{color.id}}"
+    class="btn btn-outline-primary"><i class="fas fa-pencil-alt"></i></button>
+    </span>
+   
 </ul>

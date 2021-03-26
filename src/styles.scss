@@ -4,3 +4,19 @@
     background: #1c1c1c !important;
     border-color: #1c1c1c !important;
 }
+
+.btn-outline-dark{
+    border-color: #1c1c1c !important;
+    color: #1c1c1c !important;
+
+    &:hover{
+        border-color: #1c1c1c !important;
+        background-color: #1c1c1c !important; 
+        color: #fff !important;
+    }
+}
+
+.sidebar-grid{
+    display: grid;
+    grid-template-columns: 85% 15%;
+}

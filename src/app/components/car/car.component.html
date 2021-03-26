@@ -1,7 +1,10 @@
 <div class="row ml-0 mr-0">
     <div class="col-md-6"></div>
-    <div class="col-md-6">
-        <input type="text" [(ngModel)]="carNameFilter" placeholder="Araba Adı Ara" class="form-control mt-4">
+    <div class="col-md-6 mt-4 d-flex">
+        <input type="text" [(ngModel)]="carNameFilter" placeholder="Araba Adı Ara" class="form-control">
+        <button 
+        routerLink="/car/add"
+        class="btn btn-success"><span>+</span></button>
     </div>
 </div>
 
@@ -20,8 +23,11 @@
               <hr>
               <p> <b>Renk :</b> {{car.colorName}} </p>
               <hr>
-              <a routerLink="/cars/detail/{{car.id}}" class="btn btn-outline-dark mt-2">Detay</a>
-            </div>
+              <span class="buton-space">
+                  <a routerLink="/cars/detail/{{car.id}}" class="btn btn-outline-dark mt-2">Detay</a>
+                <a routerLink="/cars/update/{{car.id}}" class="btn btn-outline-primary mt-2">Güncelle</a>
+              </span> 
+            </div> 
           </div>
     </div>
 </div>

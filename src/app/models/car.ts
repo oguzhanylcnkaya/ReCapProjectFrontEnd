@@ -8,4 +8,6 @@ export interface Car{
     carName: string;
 
     imagePath:string;
+    brandId?: number;
+    colorId?: number;
 }

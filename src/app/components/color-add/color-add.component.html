@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="colorAddForm" >
+                <div class="form-group">
+                    <label for="name">Renk Adı</label>
+                    <input 
+                    class="form-control"
+                    formControlName="name"  
+                    type="text" 
+                    name="name" id="name">
+                </div>
+                <button
+                (click)="addColor()"
+                class="btn btn-outline-dark"
+                >
+                    Ekle
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
