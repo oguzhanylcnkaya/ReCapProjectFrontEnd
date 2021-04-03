@@ -1,5 +1,39 @@
 <div class="row ml-0 mr-0">
-    <div class="col-md-6"></div>
+    <div class="col-md-6 mt-4">
+      <div class="row">
+        
+        <div class="col-md-5">
+          <select class="form-control form-select"  [(ngModel)]="brandId" >
+            <option value="0" selected>Tüm Markalar</option>
+            <option     
+            [value]="brand.id" 
+            *ngFor="let brand of brands" >{{brand.name}}</option>
+
+          </select>
+        </div>
+
+        <div class="col-md-5">
+          <select 
+          [(ngModel)]="colorId"
+          class="form-select form-control" >
+            <option value="0" selected>Tüm Renkler</option>
+            
+            <option 
+            [value]="color.id"
+            *ngFor="let color of colors" >{{color.name}}</option>
+
+          </select>
+        </div>
+        
+        <div class="col-md-2">
+          <button 
+          (click)="getCarById()"
+          class="btn btn-success"
+          >Getir</button>
+        </div>
+
+      </div>
+    </div>
     <div class="col-md-6 mt-4 d-flex">
         <input type="text" [(ngModel)]="carNameFilter" placeholder="Araba Adı Ara" class="form-control">
         <button 
@@ -25,6 +59,7 @@
               <hr>
               <span class="buton-space">
                   <a routerLink="/cars/detail/{{car.id}}" class="btn btn-outline-dark mt-2">Detay</a>
+                  <!-- <a routerLink="/rental/add/{{car.id}}" class="btn btn-outline-success mt-2">Kirala</a> -->
                 <a routerLink="/cars/update/{{car.id}}" class="btn btn-outline-primary mt-2">Güncelle</a>
               </span> 
             </div> 

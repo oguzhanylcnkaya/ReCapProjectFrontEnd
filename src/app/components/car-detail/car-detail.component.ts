@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,  } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
 import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarImageService } from 'src/app/services/car-image.service';
+import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-car-detail',
@@ -16,18 +18,26 @@ export class CarDetailComponent implements OnInit {
   carImages: CarImage[] = [];
   carImageBasePath = "https://localhost:44306/images/";
 
+  showCarAvail: boolean;
+
+  showAlert:boolean = false;
+
   constructor(private activatedRoute: ActivatedRoute,
     private carDetailService: CarDetailService,
-    private carImageService: CarImageService) { }
+    private carImageService: CarImageService,
+    private rentalService:RentalService,
+    private toastrService:ToastrService) { }
 
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe((param) => {
       if(param["carId"]){
         this.getCarDetailByCarId(param["carId"]);
+        this.isCarAvailable(param["carId"]);
       }
 
       this.getCarImageByCarId();
+      
     });
   }
 
@@ -57,4 +67,13 @@ export class CarDetailComponent implements OnInit {
     }
   } 
 
+  isCarAvailable(carId:number){
+    this.rentalService.isCarAvailable(carId)
+      .subscribe((response) => {
+        this.showCarAvail = response;
+      }, responseEror => {
+        this.showAlert = true;
+      })
+
+  }
 }

@@ -49,9 +49,19 @@
             </table>
 
             <button 
+            (click)="isCarAvailable(carDetail.id)"
+            [hidden]="!showCarAvail"
             routerLink="/rental/add/{{carDetail.id}}"
-            class="btn btn-outline-dark">Kirala</button>
+            
+            class="btn btn-outline-success">Kirala</button>
+            
+            <div *ngIf="showAlert" class="alert alert-danger mt-5" role="alert">
+                Araç başkası tarafından kiralık durumdadır!
+              </div>
         </div>
     </div>
 </div>
+
+
+
 

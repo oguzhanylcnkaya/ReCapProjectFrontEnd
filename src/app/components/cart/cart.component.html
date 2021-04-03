@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-9">
+      <div *ngFor="let cart of cartList" class="card" style="width: 100%">
+        <div class="card-body">
+          <div class="card-text">
+                <h5 class="card-title">{{ cart.brandName }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ cart.modelYear }}</h6>
+                <p>
+                    {{cart.totalPrice}} TL
+                </p>            
+          </div>
+          <div class="card-image">
+            <!-- <div *ngFor="let image of cart.carImages">
+
+                  <img width="100%" src="{{ carImageBasePath }}{{ image.imagePath }}" alt="" />
+ 
+            </div> --> 
+           <img width="100%" src="{{ carImageBasePath }}{{ cart.carImages[0].imagePath }}" alt="Araba Resmi" />
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="cartList.length > 0" class="col-md-3">
+      <div class="payment-box">
+        <h4 class="payment-box-title">Ödenecek Tutar</h4>
+        <h1 class="payment-box-total-price">{{totalPrice}} TL</h1>
+        <div class="payment-box-button">
+          <button 
+          routerLink="/payment/"
+          class="btn btn-outline-dark">Alışverişi Tamamla</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

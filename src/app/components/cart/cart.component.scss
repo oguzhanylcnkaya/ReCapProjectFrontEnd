@@ -1,0 +1,48 @@
+.card-body{
+    display: flex;
+
+    .card{
+        &-image{
+            order: 1;
+            width: 25%;
+        }
+
+        &-text{
+            order: 2;
+            width: 75%;
+            padding-left: 20px;
+        }
+    }
+}
+
+.payment-box{
+    width: 100%;
+    
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 2px #ccc;
+    padding: 50px 20px;
+
+    &-title{
+        color: #646464;
+        font-size: 1.2rem;
+        font-weight: 600;
+        line-height: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    &-total-price{
+        font-size: 2.8rem;
+        font-weight: 600;
+        line-height: 1.5rem;
+        color: #484848;
+        margin-bottom: 4rem;
+        letter-spacing: 0.033rem;
+    }
+
+    &-button{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
