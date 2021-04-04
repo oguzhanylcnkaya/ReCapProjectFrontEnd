@@ -162,5 +162,10 @@ export class CarComponent implements OnInit {
             this.router.navigate(["/cars/color/" + this.colorId])
           }
         }
-      }
+      
+  }
+
+  classColorId(id:number){
+    this.colorService.setClassColorId(id);
+  }
 }

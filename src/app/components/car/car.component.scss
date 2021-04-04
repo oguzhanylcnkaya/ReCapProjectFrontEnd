@@ -2,3 +2,13 @@
     display: flex;
     justify-content: space-between;
 }
+
+.btn-get{
+
+    padding: 0;
+
+    & button{
+        width: 100%;
+    }
+    
+}

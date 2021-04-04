@@ -12,6 +12,8 @@ export class ColorService {
 
   apiUrl = 'https://localhost:44306/api/colors/';
 
+  avtiveColorId: number;
+
   constructor(private httpClient: HttpClient) { }
 
   getColors(): Observable<ListResponseModel<Color>>{
@@ -35,4 +37,9 @@ export class ColorService {
 
     return this.httpClient.post<ResponseModel>(newApiUrl, color);
   }
+
+  setClassColorId(id:number){
+    this.avtiveColorId = id;
+  }
+
 }

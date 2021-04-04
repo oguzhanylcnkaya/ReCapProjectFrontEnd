@@ -14,7 +14,7 @@
     class="sidebar-grid"
     *ngFor="let color of colors | colorFilterPipe:colorFilter"
     >
-         <li  
+         <li 
     [class]="getCurrentClass(color)"
     (click)="setCurrentColor(color)"
     routerLink="/cars/color/{{color.id}}"

@@ -13,6 +13,8 @@ export class ColorComponent implements OnInit {
   colors : Color[] = [];
   colorFilter="";
 
+  getColorId: number;
+
   constructor(private colorService: ColorService) { }
 
   ngOnInit(): void {
