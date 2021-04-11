@@ -12,16 +12,16 @@
 
 Bu projenin Frontend tarafında Angular kullanılmıştır. Services klasörü altında wep abi tarafına hhtp request isteğinde bulunan gerekli servisler yazılmıştır. Bu servislerden gelen bilgileri karşılamak adına models klasörü altında varlıklar tanımlanmıştır. Proje de gerekli gösterimleri yapmak için ise components klasörü altında componentler oluşturulmuştur.
 
-![Proje Codları](./src\assets\readme\vscode.PNG)
+![Proje Codları](./src/assets/readme/vscode.PNG)
 
 
-
+<!-- https://github.com/oguzhanylcnkaya/ReCapProjectFrontEnd/tree/master/src/assets/readme -->
 
 ## Ana Sayfa
 ---
 
-![Ana Sayfa](src\assets\readme\anasayfa.PNG)
-![Ana Sayfa](src\assets\readme\anasayfa2.PNG)
+![Ana Sayfa](./src/assets/readme/anasayfa.PNG)
+![Ana Sayfa](./src/assets/readme/anasayfa2.PNG)
 
 <!-- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
 
