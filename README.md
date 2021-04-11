@@ -56,7 +56,7 @@ Bu projenin Frontend tarafında Angular kullanılmıştır. Services klasörü a
 ---
 ![Giriş Sayfası](./src/assets/readme/giris.png)
 
-## Giriş Yapma Sayfası
+## Kayıt Olma Sayfası
 ---
 ![Kayıt Olma Sayfası](./src/assets/readme/kaydol.png)
 
@@ -74,7 +74,7 @@ Bu projenin Frontend tarafında Angular kullanılmıştır. Services klasörü a
 
 ## Kullanıcı Dropdown'u
 ---
-![Kullanıcı Dropdown'u](./src/assets/readme/kullanici.png)
+![Kullanıcı Dropdown'u](./src/assets/readme/kullanici.PNG)
 
 ## Kullanıcı Düzenleme Sayfası
 ---
