@@ -7,6 +7,7 @@ import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
 import { RentalService } from 'src/app/services/rental.service';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-car',

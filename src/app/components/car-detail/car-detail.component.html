@@ -46,9 +46,14 @@
                     <th>Açıklama :</th>
                     <td>{{carDetail.description}}</td>
                 </tr>
+                <tr>
+                    <th>Minimum Findex Puanı</th>
+                    <td>{{carDetail.carFindexPoint}}</td>
+                </tr>
             </table>
 
             <button 
+            *ngIf="user.customerFindexPoint > carDetail.carFindexPoint"
             (click)="isCarAvailable(carDetail.id)"
             [hidden]="!showCarAvail"
             routerLink="/rental/add/{{carDetail.id}}"
@@ -57,7 +62,11 @@
             
             <div *ngIf="showAlert" class="alert alert-danger mt-5" role="alert">
                 Araç başkası tarafından kiralık durumdadır!
-              </div>
+            </div>
+
+            <div *ngIf="user.customerFindexPoint < carDetail.carFindexPoint" class="alert alert-danger" role="alert">
+                Findex puanınız bu aracı kiralamak için yeterli değildir.
+            </div>
         </div>
     </div>
 </div>

@@ -7,12 +7,15 @@ import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
 import { Customer } from 'src/app/models/customer';
 import { CustomerDetail } from 'src/app/models/customerDetail';
+import { User } from 'src/app/models/user';
 import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CustomerService } from 'src/app/services/customer.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { RentalService } from 'src/app/services/rental.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-rental-add',
@@ -31,6 +34,8 @@ export class RentalAddComponent implements OnInit {
 
   carImages : CarImage[];
 
+  user:User;
+
   constructor(private rentalService:RentalService,
     private formBuilder:FormBuilder,
     private activetedRoute:ActivatedRoute,
@@ -39,11 +44,14 @@ export class RentalAddComponent implements OnInit {
     private carService:CarService,
     private carImageService:CarImageService,
     private cartService:CartService,
-    private toastrService:ToastrService) { }
+    private toastrService:ToastrService,
+    private localStorageService:LocalStorageService,
+    private userService:UserService) { }
 
   ngOnInit(): void {
     this.createRentalAddForm();
     this.getCustomersDetail();
+    this.getUserById();
 
     this.activetedRoute.params
       .subscribe((param) => {
@@ -59,6 +67,15 @@ export class RentalAddComponent implements OnInit {
     this.customerService.getCustomersDetail()
       .subscribe((response) => {
         this.customersDetails = response.data;
+      })
+  }
+
+  getUserById(){
+    let userId = this.localStorageService.getItem("userId");
+
+    this.userService.getUserById(Number(userId))
+      .subscribe((response) => {
+        this.user = response.data;
       })
   }
 
@@ -79,7 +96,7 @@ export class RentalAddComponent implements OnInit {
   createRentalAddForm(){
     this.rentalAddForm = this.formBuilder.group({
       carId: [""],
-      customerId:["", Validators.required],
+      customerId:["", Validators.nullValidator],
       rentDate:["", Validators.required],
       returnDate:[""],
     });
@@ -101,12 +118,18 @@ export class RentalAddComponent implements OnInit {
       //Araç kiralama bilgilerinin eklenmesi
       rentalModel.rentDate = this.rentalAddForm.value.rentDate;
       rentalModel.returnDate = this.rentalAddForm.value.returnDate;
-      rentalModel.customerId = this.rentalAddForm.value.customerId;
+
+      // rentalModel.customerId = this.rentalAddForm.value.customerId;
+      rentalModel.customerId = this.user.id;
+
       this.rentalService.setRental(rentalModel);
 
       //Sepete eklenmesi
       this.cartService.addToCart(rentalModel);
       this.toastrService.info("Sepete eklendi", this.carDetail.carName);
+
+      //localStorage'a eklenmesi
+      //this.localStorageService.setItem("rentalInfo", JSON.stringify(rentalModel))
     }
     else{
       this.toastrService.error("Lütfen ilgili yerleri doldurunuz", "Hata!");

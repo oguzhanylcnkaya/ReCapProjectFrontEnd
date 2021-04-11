@@ -3,7 +3,9 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 import { Card } from 'src/app/models/card';
 import { Rental } from 'src/app/models/rental';
+import { CardService } from 'src/app/services/card.service';
 import { CartService } from 'src/app/services/cart.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -18,7 +20,7 @@ export class PaymentComponent implements OnInit {
   cartTotal:number;
   customerId:number;
   cardId: number;
-  saveCard:boolean;
+  saveCard:boolean = false;
 
   rentalInfo:Rental;
 
@@ -28,21 +30,24 @@ export class PaymentComponent implements OnInit {
     private paymentService:PaymentService,
     private cartService:CartService,
     private toastrService:ToastrService,
-    private rentalService:RentalService) { }
+    private rentalService:RentalService,
+    private cardService:CardService,
+    private localStorageService:LocalStorageService) { }
 
   ngOnInit(): void {
+
+    this.customerId = Number(this.localStorageService.getItem("userId"));
 
     this.cartService.data
       .subscribe((response) => {
           this.cartTotal = response.cartTotal;
-          this.customerId = response.customerId;
+          // this.customerId = response.customerId;
       })
       
-
     this.createPaymentAddForm();
     this.getCardList();
-
     this.getRental();
+
   }
 
   createPaymentAddForm(){
@@ -51,7 +56,7 @@ export class PaymentComponent implements OnInit {
       cardNumber: ["",Validators.required],
       cardExpirationDate :["", Validators.required],
       cardCvv:["",Validators.required],
-      saveCard:[""]
+      saveCard:[false]
     })
   }
 
@@ -64,18 +69,23 @@ export class PaymentComponent implements OnInit {
       paymentModel.total = this.cartTotal;
       paymentModel.cardId = this.customerId + this.cartTotal;
       paymentModel.paymentDate = new Date().toISOString().slice(0,10);
-
+      this.saveCard = paymentModel.saveCard;
       if(typeof(paymentModel.cardId) === "string"){
         paymentModel.cardId = parseInt(paymentModel.cardId);
       }
-
       if(typeof(paymentModel.customerId) === "string"){
         paymentModel.customerId = parseInt(paymentModel.customerId);
       }
 
-      this.paymentService.payment(paymentModel, this.saveCard)
+      console.log(this.saveCard);
+
+      this.paymentService.payment(paymentModel)
         .subscribe((response) => {
           this.toastrService.success(response.message, "Başarılı Ödeme!");
+
+          if(this.saveCard){
+            this.addCart();
+          }
 
           this.rentalService.rentalAdd(this.rentalInfo)
           .subscribe((resp) => {
@@ -96,6 +106,23 @@ export class PaymentComponent implements OnInit {
 
   }
 
+  addCart(){
+    if(this.paymentAddForm.valid){
+      let cardModel = this.paymentAddForm.value;
+      cardModel.cardCvv = parseInt(cardModel.cardCvv);
+
+      // var csId = (this.localStorageService.getItem("userId"));
+      cardModel.customerId = Number(this.customerId);
+
+      this.cardService.addCard(cardModel)
+        .subscribe((response) => {
+          this.toastrService.success("Kart Bilgileri Eklendi", "Başarılı");
+        }, responseError => {
+          this.toastrService.error("Kart Bilgileri Eklenirken Bir Sorun Oluştu", "Hata!")
+        })
+    }
+  }
+
   setCurrentCard(card:Card){
     this.paymentAddForm.setValue({
       cardOwnerName : card.cardOwnerName,
@@ -108,8 +135,10 @@ export class PaymentComponent implements OnInit {
   }
 
   getCardList() {
-    this.paymentService.getByCustomerId(1)
+    this.cardService.getByCustomerId(this.customerId)
       .subscribe((response) => {
+        console.log(response);
+
         this.cards = response.data;
       })
   }

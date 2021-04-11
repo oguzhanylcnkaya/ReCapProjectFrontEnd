@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ReCapProjectFrontEnd';
+
+  constructor(private activatedRoute: ActivatedRoute){}
+
+  ngOnInit(): void {
+
+
+  }
+
 }

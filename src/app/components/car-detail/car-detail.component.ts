@@ -3,9 +3,12 @@ import { ActivatedRoute,  } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
+import { User } from 'src/app/models/user';
 import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarImageService } from 'src/app/services/car-image.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { RentalService } from 'src/app/services/rental.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-car-detail',
@@ -15,10 +18,14 @@ import { RentalService } from 'src/app/services/rental.service';
 export class CarDetailComponent implements OnInit {
 
   carDetail: Car;
+  user:User;
+
   carImages: CarImage[] = [];
   carImageBasePath = "https://localhost:44306/images/";
 
   showCarAvail: boolean;
+
+  showFindexAvail:boolean = false;
 
   showAlert:boolean = false;
 
@@ -26,7 +33,9 @@ export class CarDetailComponent implements OnInit {
     private carDetailService: CarDetailService,
     private carImageService: CarImageService,
     private rentalService:RentalService,
-    private toastrService:ToastrService) { }
+    private toastrService:ToastrService,
+    private userService:UserService,
+    private localStorageService:LocalStorageService) { }
 
   ngOnInit(): void {
 
@@ -37,7 +46,8 @@ export class CarDetailComponent implements OnInit {
       }
 
       this.getCarImageByCarId();
-      
+      this.getUser();
+
     });
   }
 
@@ -49,6 +59,16 @@ export class CarDetailComponent implements OnInit {
     });
   }
 
+  getUser(){
+
+    let userId = this.localStorageService.getItem("userId")
+
+    this.userService.getUserById(Number(userId))
+      .subscribe((response) => {
+        this.user = response.data;
+        console.log(this.user);
+      })
+  }
 
   getCarImageByCarId(){
     this.carImageService.getCarImageByCarId(this.activatedRoute.snapshot.params["carId"])
@@ -76,4 +96,5 @@ export class CarDetailComponent implements OnInit {
       })
 
   }
+
 }

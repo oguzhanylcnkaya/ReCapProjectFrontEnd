@@ -1,3 +1,75 @@
 .bg-dark{
     background-color: #1c1c1c !important;
+    //background: transparent !important;
+}
+.margin-side button{
+    margin: 0 5px;
+}
+
+.account-nav{
+    position: relative;
+
+    &-dropdown{
+        position: absolute;
+        width: 200px;
+        height: auto;
+        top: 80px;
+        z-index: 88;
+        left: 0;
+        font-weight: 400;
+        background-color: #fff;
+        box-shadow: 0 3px 10px 0 rgb(0 0 0 / 7%);
+        border: solid 1px #e6e6e6;
+        border-radius: 3px;
+        transition: all .5s;
+        opacity: 0;
+        visibility: hidden;
+
+        &-pad{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            padding: 16px;
+
+            & p{
+                
+            }
+
+            &-user{
+                cursor: pointer;
+                text-decoration: none;
+                padding: 5px 0;
+            }
+        }
+    }
+
+    &:hover &-dropdown{
+        top: 40px;
+        visibility: visible;
+        opacity: 1;
+        
+    }
+}
+
+.findex-point{
+    font-size: 13px;
+}
+
+.fa-star{
+    color: #cccc00;
+    text-shadow: 0 0 2px #ffff0f, 0 0 4px #ffff0f;
+}
+
+.btn-outline-secondary:hover .fa-star{
+    color: #ffff0f;
+}
+
+.navbar-comp{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 22;
+    width: 100%;
 }

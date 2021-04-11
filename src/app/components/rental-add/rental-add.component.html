@@ -1,9 +1,15 @@
 <form [formGroup]="rentalAddForm">
-    <div class="form-group">
+    
+    <!-- <div class="form-group">
         <label for="customerId">Ad Soyad</label>
         <select formControlName="customerId" class="form-control" name="customerId" >
             <option [value]="customer.customerId"  *ngFor="let customer of customersDetails">{{customer.fullName}}</option>
         </select>
+    </div> -->
+
+    <div class="form-group">
+        <label for="customerId">Ad Soyad</label>
+        <input disabled class="form-control" type="text" [value]="user.firstName + ' ' + user.lastName" >
     </div>
     <div class="form-group">
         <label for="rentDate">Kiralama Tarihi</label>

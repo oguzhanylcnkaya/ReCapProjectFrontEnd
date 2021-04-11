@@ -1,6 +1,29 @@
-# ReCapProjectFrontEnd
+# Araç Kiralama Projesi (FrontEnd)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
+---
+
+## Proje Hakkında Bilgiler
+
+- Araç Kiralama Projesinin Backend tarafı .Net Core, Frontend tarafı ise Angular ile oluşturulmuştur.
+- Backend kodlarına [bu linkten](https://github.com/oguzhanylcnkaya/ReCapProject) ulaşabilirsiniz.
+- Frontend kodlarına [bu linkten](https://github.com/oguzhanylcnkaya/ReCapProjectFrontEnd) ulaşabilirsiniz.
+
+### FrontEnd
+
+Bu projenin Frontend tarafında Angular kullanılmıştır. Services klasörü altında wep abi tarafına hhtp request isteğinde bulunan gerekli servisler yazılmıştır. Bu servislerden gelen bilgileri karşılamak adına models klasörü altında varlıklar tanımlanmıştır. Proje de gerekli gösterimleri yapmak için ise components klasörü altında componentler oluşturulmuştur.
+
+![Proje Codları](src\assets\readme\vscode.PNG)
+
+
+
+
+## Ana Sayfa
+---
+
+![Ana Sayfa](src\assets\readme\anasayfa.PNG)
+![Ana Sayfa](src\assets\readme\anasayfa2.PNG)
+
+<!-- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
 
 ## Development server
 
@@ -24,4 +47,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page. -->

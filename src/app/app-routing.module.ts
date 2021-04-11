@@ -9,27 +9,34 @@ import { CarComponent } from './components/car/car.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ColorAddComponent } from './components/color-add/color-add.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
 import { PaymentComponent } from './components/payment/payment.component';
+
 import { RentalAddComponent } from './components/rental-add/rental-add.component';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
-  {path: "", pathMatch : 'full', component: CarComponent},
-  {path: "cars", component: CarComponent},
-  {path: "cars/brand/:brandId", component: CarComponent},
-  {path: "cars/color/:colorId", component: CarComponent},
-  {path:"cars/brand/:brandId/color/:colorId",component:CarComponent},
+  {path: "", pathMatch : 'full', component: HomeComponent},
+  {path: "cars", component: HomeComponent},
+  {path: "cars/brand/:brandId", component: HomeComponent},
+  {path: "cars/color/:colorId", component: HomeComponent},
+  {path:"cars/brand/:brandId/color/:colorId",component:HomeComponent},
   
   {path: "cars/detail/:carId", component: CarDetailComponent},
 
   {path: "rental/add/:carId", component: RentalAddComponent},
   {path: "brand/add", component: BrandAddComponent},
   {path: "color/add", component: ColorAddComponent},
-  {path: "car/add", component: CarAddComponent},
+  {path: "car/add", component: CarAddComponent, canActivate: [LoginGuard]},
   {path: "cars/update/:carId", component:CarUpdateComponent},
   {path: "brand/update/:brandId", component: BrandUpdateComponent},
   {path: "color/update/:colorId", component: ColorUpdateComponent},
   {path: "cart", component: CartComponent},
-  {path: "payment", component: PaymentComponent}
+  {path: "payment", component: PaymentComponent},
+  {path:"login", component:LoginComponent},
+  {path: "profile", component: UserDetailComponent}
 ];
 
 @NgModule({

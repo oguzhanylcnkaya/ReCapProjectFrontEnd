@@ -54,7 +54,8 @@ export class CarAddComponent implements OnInit {
       modelYear: ["", Validators.required],
       dailyPrice: ["", Validators.required],
       description: ["", Validators.required],
-      carName: ["", Validators.required]
+      carName: ["", Validators.required],
+      carFindexPoint: [""]
     });
   }
 
@@ -70,6 +71,8 @@ export class CarAddComponent implements OnInit {
       if(typeof(carModel.colorId)== "string"){
         carModel.colorId = parseInt(carModel.colorId);
       } 
+
+      carModel.carFindexPoint = Number(carModel.carFindexPoint);
 
       this.carService.addCar(carModel)
         .subscribe((response) => {

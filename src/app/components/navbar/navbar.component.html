@@ -1,4 +1,4 @@
-<div class="navbar-dark bg-dark">
+<div class="navbar-dark bg-dark navbar-comp">
     <div class="container">
       <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand"><i class="fas fa-car"></i> Ozi Rent a Car</a>
@@ -29,12 +29,45 @@
               <a class="nav-link disabled" href="#">Disabled</a>
             </li> -->
           </ul>
+
+          <div class="margin-side">
+            
             <button 
             routerLink="/cart/"
             class="btn btn-outline-success my-2 my-sm-0" type="submit">
               <i class="fas fa-shopping-cart"></i>
               Sepetim</button>
+
+              <button
+              *ngIf="!isAuth"
+              class="btn btn-outline-primary"
+              routerLink="/login/"
+              >
+              <i class="fas fa-user"></i>
+                Giriş Yap
+              </button>
+
+          </div>
           
+          <div *ngIf="isAuth" class="account-nav">
+            <button class="btn btn-outline-secondary">
+              <i class="fas fa-user"></i> {{user.firstName}} {{user.lastName}}
+              <span class="findex-point">
+                ({{user.customerFindexPoint}} <i class="fas fa-star"></i>)
+              </span>
+            </button>
+
+            <div class="account-nav-dropdown">
+              <div class="account-nav-dropdown-pad">
+                <p>{{user.firstName}} {{user.lastName}}</p>
+
+                <a routerLink="/profile" class="account-nav-dropdown-pad-user" ><i class="fas fa-user"></i> Bilgilerimi Düzenle</a>
+                <a class="account-nav-dropdown-pad-user" (click)="logout()" ><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+              </div>
+            </div>
+
+          </div>
+     
         </div>
       </nav>
     </div>
