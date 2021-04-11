@@ -15,13 +15,76 @@ Bu projenin Frontend tarafında Angular kullanılmıştır. Services klasörü a
 ![Proje Codları](./src/assets/readme/vscode.PNG)
 
 
-<!-- https://github.com/oguzhanylcnkaya/ReCapProjectFrontEnd/tree/master/src/assets/readme -->
+<!-- https://github.com/oguzhanylcnkaya/ReCapProjectFrontEnd/tree/master/src/assets/readme 
+
+./src/assets/readme/
+-->
 
 ## Ana Sayfa
 ---
-
 ![Ana Sayfa](./src/assets/readme/anasayfa.PNG)
+
 ![Ana Sayfa](./src/assets/readme/anasayfa2.PNG)
+
+- Yukarıdaki kısımda backend tarafından gelen araçlar listelenmektedir.
+- Yandaki sidebar da araç markaları ve renkler listelenmektedir.
+- Sidebardaki araç markalarına veya renklere tıklayınca ilgili araçlar gelmektedir.
+- Sidebardaki marka ara ve renk ara inputları marka ve renk aratma işlemleri yapmaktadır.
+- Tüm markalar ve tüm renkler de marka ve renkleri dropdown şeklinde listelemektedir.
+- Bu dropdownlar yani açılır kutular ile de araç listeleme özelliklerini yapabilirsiniz.
+- Hem belli bir marka hem de belli bir renk ile araçları listeyebilirsiniz. 
+- Araba adı ara inputuyla da ilgili araba adlarını aratabilirsiniz.
+- İlgili araçların detayına gidebilirsiniz, gerekli rollere sahipseniz ekleme ve güncelleme işlemlerini de yapabilirsiniz.
+
+## Araba Detay Sayfası
+---
+![Detay Sayfası](./src/assets/readme/detay.png)
+
+## Araba Kiralama Sayfası
+---
+![Kiralama Sayfası](./src/assets/readme/kiralama.png)
+
+## Sepete Eklenenler Sayfası
+---
+![Sepet Sayfası](./src/assets/readme/sepet.png)
+
+## Ödeme Sayfası
+---
+![Ödeme Sayfası](./src/assets/readme/odeme.png)
+
+## Giriş Yapma Sayfası
+---
+![Giriş Sayfası](./src/assets/readme/giris.png)
+
+## Giriş Yapma Sayfası
+---
+![Kayıt Olma Sayfası](./src/assets/readme/kaydol.png)
+
+## Araba Ekleme Sayfası
+---
+![Araba Ekleme Sayfası](./src/assets/readme/arabaekle.png)
+
+## Marka Ekleme Sayfası
+---
+![Araba Ekleme Sayfası](./src/assets/readme/markaekle.png)
+
+## Renk Ekleme Sayfası
+---
+![Renk Ekleme Sayfası](./src/assets/readme/renkekle.png)
+
+## Kullanıcı Dropdown'u
+---
+![Kullanıcı Dropdown'u](./src/assets/readme/kullanici.png)
+
+## Kullanıcı Düzenleme Sayfası
+---
+![Kullanıcı Düzenleme Sayfası](./src/assets/readme/kullaniciduzenle.png)
+
+
+
+---
+###### Dipnot
+Projenin tasarım kısmında ve projenin içindeki eksiklikler ile ilgili çalışmalara halen devam etmekteyim. Bu kısımları yaptıkça projeyi güncelleyeceğim. 
 
 <!-- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
 
