@@ -1,34 +1,48 @@
-<form [formGroup]="rentalAddForm">
+<app-section-background></app-section-background>
+
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="rentalAddForm">
     
-    <!-- <div class="form-group">
-        <label for="customerId">Ad Soyad</label>
-        <select formControlName="customerId" class="form-control" name="customerId" >
-            <option [value]="customer.customerId"  *ngFor="let customer of customersDetails">{{customer.fullName}}</option>
-        </select>
-    </div> -->
-
-    <div class="form-group">
-        <label for="customerId">Ad Soyad</label>
-        <input disabled class="form-control" type="text" [value]="user.firstName + ' ' + user.lastName" >
+                <!-- <div class="form-group">
+                    <label for="customerId">Ad Soyad</label>
+                    <select formControlName="customerId" class="form-control" name="customerId" >
+                        <option [value]="customer.customerId"  *ngFor="let customer of customersDetails">{{customer.fullName}}</option>
+                    </select>
+                </div> -->
+            
+                <div class="form-group">
+                    <label for="customerId">Ad Soyad</label>
+                    <input disabled class="form-control" type="text" [value]="user.firstName + ' ' + user.lastName" >
+                </div>
+                <div class="form-group">
+                    <label for="rentDate">Kiralama Tarihi</label>
+                    <input 
+                    
+                    (change)="calcTotalPrice()"
+                    formControlName="rentDate" class="form-control" type="date" name="rentDate">
+                </div>
+                <div class="form-group">
+                    <label for="returnDate">Teslim Tarihi</label>
+                    <input 
+                    
+                    (change)="calcTotalPrice()"
+                    formControlName="returnDate" class="form-control" type="date" name="returnDate">
+                </div>
+                <div *ngIf="totalPrice" class="form-group">
+                    <label for="">Toplam Ücret</label>
+                    <div><b>{{totalPrice}} ₺</b></div>
+                </div>
+            
+                <button 
+      
+                (click)="addToCart()"
+                    class="btn btn-outline-dark">Kirala
+                </button>
+            
+                
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="rentDate">Kiralama Tarihi</label>
-        <input 
-        (change)="calcTotalPrice()"
-        formControlName="rentDate" class="form-control" type="date" name="rentDate">
-    </div>
-    <div class="form-group">
-        <label for="returnDate">Teslim Tarihi</label>
-        <input 
-        (change)="calcTotalPrice()"
-        formControlName="returnDate" class="form-control" type="date" name="returnDate">
-    </div>
-    <div *ngIf="totalPrice" class="form-group">
-        <label for="">Toplam Ücret</label>
-        <div><b>{{totalPrice}} ₺</b></div>
-    </div>
-
-    <button 
-    (click)="addToCart()"
-        class="btn btn-outline-dark">Kirala</button>
-</form>
+</div>

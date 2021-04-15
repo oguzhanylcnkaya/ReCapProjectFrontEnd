@@ -1,0 +1,105 @@
+<app-section-background>
+
+</app-section-background>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="filter">
+                
+                <!-- Marka -->
+                <div class="filter group">
+                    <!-- <select class="form-control form-select" [(ngModel)]="brandId">
+                        <option value="0" selected>Tüm Markalar</option>
+                        <option [value]="brand.id" *ngFor="let brand of brands">{{brand.name}}</option>
+
+                    </select> -->
+                    <input type="text" [(ngModel)]="filterBrand" class="form-control mb-3" placeholder="Marka Ara" >
+                    <ul class="list-group">
+                        <li
+                            class="add-brand"
+                            [class]="getAllBrandsClass()"
+                            routerLink="/car-page"
+                        >Tüm Markalar
+                        </li>
+                        
+                            <li *ngFor="let brand of brands | brandFilterPipe:filterBrand"
+                        (click)="setCurrentBrand(brand)"
+                        [class]="getCurrentBrand(brand)" 
+                        routerLink="/car-page/brand/{{brand.id}}">{{brand.name}} </li>
+                        
+                    </ul>
+                </div>
+
+                <!-- Renk -->
+                <div class="filter group">
+                    <!-- <select [(ngModel)]="colorId" class="form-select form-control">
+                        <option value="0" selected>Tüm Renkler</option>
+
+                        <option [value]="color.id" *ngFor="let color of colors">{{color.name}}</option>
+
+                    </select> -->
+                    <input placeholder="Renk Ara" type="text" class="form-control mb-3" [(ngModel)]="colorFilter">
+                    <ul class="list-group">
+                        <li
+                        [class]="getAllColorClass()"
+                        routerLink="/cars"
+                        >Tüm Renkler</li>
+                        
+                             <li *ngFor="let color of colors | colorFilterPipe:colorFilter"
+                        [class]="getCurrentClass(color)"
+                        (click)="setCurrentColor(color)"
+                        routerLink="/car-page/color/{{color.id}}"
+                        >{{color.name}}</li>
+                        
+                       
+                    </ul>
+                </div>
+
+                <div class="filter group">
+                    <div class="col-md-2 btn-get">
+                        <button (click)="getCarById()" class="btn btn-success">Filtrele</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="filter-search-box">
+                <input type="text" [(ngModel)]="carNameFilter" placeholder="Araba Adı Ara" class="form-control">
+            </div>
+            <div class="mt-3"> 
+                <div class="filter-cars">
+                    <div class="row">
+                        <div *ngFor="let car of cars | carFilterPipe:carNameFilter"  class="col-md-4 my-4">
+                            <div class="card" style="width: 100%;">
+                                <img src="{{carImageBasePath}}{{getCarImage(car)}}" class="card-img-top" alt="Araba Resmi">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">{{car.carName}}</h5>
+                                    <hr>
+                                    <p> <b>Marka :</b> {{car.brandName}} </p>
+                                    <hr>
+                                    <p> <b>Model Yılı :</b> {{car.modelYear | date:" y"}} </p>
+                                    <hr>
+                                    <p> <b>Günlük Fiyatı :</b> {{car.dailyPrice | currency:'TRY':'₺ ': '3.0'}} </p>
+                                    <hr>
+                                    <p> <b>Renk :</b> {{car.colorName}} </p>
+                                    <hr>
+                    
+                                    <span class="buton-space">
+                                        <a routerLink="/cars/detail/{{car.id}}" class="btn btn-outline-dark mt-2">Detay</a>
+
+                                        <a (click)="deleteCar(car.id)" class="btn btn-outline-danger mt-2" >Sil</a>
+                                        <!-- <a routerLink="/rental/add/{{car.id}}" class="btn btn-outline-success mt-2">Kirala</a> -->
+                                        <a routerLink="/cars/update/{{car.id}}" class="btn btn-outline-primary mt-2">Güncelle</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                </div>
+            </div>        
+        </div>
+    </div>
+</div>

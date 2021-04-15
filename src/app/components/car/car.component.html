@@ -1,8 +1,9 @@
 <div class="row ml-0 mr-0">
-    <div class="col-md-6 mt-4">
+    
+  <div class="col-md-8 mt-4">
       <div class="row">
         
-        <div class="col-md-5">
+        <div class="col-md-4">
           <select class="form-control form-select"  [(ngModel)]="brandId" >
             <option value="0" selected>Tüm Markalar</option>
             <option     
@@ -12,7 +13,7 @@
           </select>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-4">
           <select 
           (change)="classColorId(colorId)"
           [(ngModel)]="colorId"
@@ -26,20 +27,26 @@
           </select>
         </div>
         
-        <div class="col-md-2 btn-get">
+        <div class="col-md-4 d-flex btn-get">
           <button 
           (click)="getCarById()"
           class="btn btn-success"
           >Getir</button>
+          <button
+          routerLink="/cars"
+          class="btn btn-dark"
+          >
+            Sıfırla
+          </button>
         </div>
 
       </div>
     </div>
-    <div class="col-md-6 mt-4 d-flex">
+    <div class="col-md-4 mt-4 d-flex">
         <input type="text" [(ngModel)]="carNameFilter" placeholder="Araba Adı Ara" class="form-control">
-        <button 
+        <!-- <button 
         routerLink="/car/add"
-        class="btn btn-success"><span>+</span></button>
+        class="btn btn-success"><span>+</span></button> -->
     </div>
 </div>
 

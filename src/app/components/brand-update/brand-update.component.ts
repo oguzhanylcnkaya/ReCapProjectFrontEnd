@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brand.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-brand-update',
@@ -14,20 +16,25 @@ export class BrandUpdateComponent implements OnInit {
   brandUpdateForm: FormGroup;
   brandId:number;
 
+  brand:Brand;
+
   constructor(private formBuilder:FormBuilder,
     private brandService:BrandService,
     private activedRoute:ActivatedRoute,
-    private toastrService:ToastrService) { }
+    private toastrService:ToastrService,
+    private localStorageService:LocalStorageService) { }
 
   ngOnInit(): void {
-    this.createBrandUpdateForm();
-
+    
     this.activedRoute.params
     .subscribe((param) => {
       if(param["brandId"]){
-        this.brandId = param["brandId"]
+        this.brandId = param["brandId"];
+        this.getBrandById(param["brandId"])
       }
     })
+
+    this.createBrandUpdateForm();
   }
 
   createBrandUpdateForm(){
@@ -69,6 +76,13 @@ export class BrandUpdateComponent implements OnInit {
       this.toastrService.error("Lütfen ilgili yerleri doldurunuz.", "Hata!");
     }
 
+  }
+
+  getBrandById(id:number){
+    this.brandService.getBrandId(id)
+      .subscribe((response) => {
+        this.brand = response.data;
+      })
   }
 
 }

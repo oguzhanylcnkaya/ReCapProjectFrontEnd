@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
+import { CarDetail } from 'src/app/models/carDetail';
 import { Color } from 'src/app/models/color';
 import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
@@ -21,6 +22,9 @@ export class CarUpdateComponent implements OnInit {
   colors : Color[];
   carId: number;
 
+  car:Car;
+  carDetail:CarDetail;
+
   constructor(private carService:CarService,
     private formBuilder:FormBuilder,
     private brandService:BrandService,
@@ -37,6 +41,8 @@ export class CarUpdateComponent implements OnInit {
       .subscribe((param) => {
         if(param["carId"]){
           this.carId = param["carId"];
+          this.getCarDetailByCarId(param["carId"]);
+          this.getCarById(param["carId"])
         }
       })
   }
@@ -49,7 +55,8 @@ export class CarUpdateComponent implements OnInit {
       modelYear: ["", Validators.required],
       dailyPrice: ["", Validators.required],
       description: ["", Validators.required],
-      carName: ["", Validators.required]
+      carName: ["", Validators.required],
+      carFindexPoint: [""]
     });
 
   }
@@ -108,4 +115,19 @@ export class CarUpdateComponent implements OnInit {
     }
   }
 
+  getCarById(id:number){
+    this.carService.getCarById(id)
+      .subscribe((response) => {
+        this.car = response.data;
+        console.log(this.car)
+      })
+  }
+
+  getCarDetailByCarId(carId:number){
+    this.carService.getCarDetailByCarId(carId)
+      .subscribe((response) => {
+        this.carDetail = response.data;
+        //console.log(this.carDetail)
+      })
+  }
 }

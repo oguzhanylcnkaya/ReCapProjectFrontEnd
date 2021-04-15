@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Color } from 'src/app/models/color';
 import { ColorService } from 'src/app/services/color.service';
 
@@ -11,11 +12,14 @@ export class ColorComponent implements OnInit {
 
   currentColor : Color;
   colors : Color[] = [];
+  color:Color;
+
   colorFilter="";
 
   getColorId: number;
 
-  constructor(private colorService: ColorService) { }
+  constructor(private colorService: ColorService,
+    private toastrService:ToastrService) { }
 
   ngOnInit(): void {
     this.getColors();
@@ -28,28 +32,47 @@ export class ColorComponent implements OnInit {
       })
   }
 
-  setCurrentColor(color: Color){
-    this.currentColor = color;
+  getColorById(id:number){
+    return this.colorService.getColorById(id);
   }
 
-  getCurrentClass(color: Color){
+  // setCurrentColor(color: Color){
+  //   this.currentColor = color;
+  // }
 
-    if(this.currentColor === color){
-      return "list-group-item active";
-    }
-    else{
-      return "list-group-item";
-    }
-  }
+  // getCurrentClass(color: Color){
 
-  getAllColorClass(){
+  //   if(this.currentColor === color){
+  //     return "list-group-item active";
+  //   }
+  //   else{
+  //     return "list-group-item";
+  //   }
+  // }
 
-    if(!this.currentColor){
-      return "list-group-item active";
-    }
-    else{
-      return "list-group-item";
-    }
+  // getAllColorClass(){
+
+  //   if(!this.currentColor){
+  //     return "list-group-item active";
+  //   }
+  //   else{
+  //     return "list-group-item";
+  //   }
+  // }
+
+  deleteColor(id:number){
+
+    this.getColorById(id)
+      .subscribe((response) => {
+
+        this.color = response.data;
+
+        this.colorService.deleteColor(this.color)
+          .subscribe((response) => {
+            this.toastrService.success(response.message, "Renk Silindi!");
+            this.ngOnInit();
+          })
+      })
   }
 
 }

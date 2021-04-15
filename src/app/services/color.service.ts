@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Color } from '../models/color';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,18 @@ export class ColorService {
 
   setClassColorId(id:number){
     this.avtiveColorId = id;
+  }
+
+  deleteColor(color:Color):Observable<ResponseModel>{
+    const newApiUrl = this.apiUrl + "delete";
+
+    return this.httpClient.post<ResponseModel>(newApiUrl, color);
+  }
+
+  getColorById(id:number): Observable<SingleResponseModel<Color>>{
+    let newApiUrl = this.apiUrl + "get?id=" + id;
+
+    return this.httpClient.get<SingleResponseModel<Color>>(newApiUrl);
   }
 
 }

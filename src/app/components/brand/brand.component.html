@@ -1,28 +1,62 @@
-<div class="my-4 d-flex">
-    <input type="text" [(ngModel)]="filterBrand" class="form-control" placeholder="Marka Ara" >
-    <button 
-        routerLink="/brand/add"
-        class="btn btn-outline-success"> 
-        <span>+</span></button>
+<app-section-background data="Markalar"></app-section-background>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-3">
+            <input type="text" [(ngModel)]="filterBrand" class="form-control" placeholder="Marka Ara">
+        </div>
+        <div class="col-md-4">
+            <button routerLink="/brand/add" class="btn btn-outline-success">
+                <span>Marka Ekle</span></button>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <table class="table  table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Marka Adı</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let brand of brands | brandFilterPipe:filterBrand">
+                        <td>{{brand.id}}</td>
+                        <td>{{brand.name}}</td>
+                        <td class="td-button">
+
+                            <button 
+                            
+                            routerLink="/brand/update/{{brand.id}}" 
+                            class="btn btn-outline-primary">
+                            <i class="fas fa-pencil-alt"></i> Güncelle</button>
+
+                            <button 
+                            (click)="deleteBrand(brand.id)"
+                            class="btn btn-outline-danger"
+                            >
+                                <i class="fas fa-trash-alt"></i> Sil
+                            </button>
+                        
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 </div>
 
 
-<ul class="list-group">
-    <li
-        class="add-brand"
-        [class]="getAllBrandsClass()"
-        routerLink="/cars"
-    >Tüm Markalar
-    </li>
-    <span 
-    class="sidebar-grid"
-    *ngFor="let brand of brands | brandFilterPipe:filterBrand">
-        <li 
-    (click)="setCurrentBrand(brand)"
-    [class]="getCurrentBrand(brand)" 
-    routerLink="/cars/brand/{{brand.id}}">{{brand.name}} </li>
-    <button 
-    routerLink="/brand/update/{{brand.id}}"
-    class="btn btn-outline-primary"><i class="fas fa-pencil-alt"></i></button>
+
+<!-- <ul class="list-group">
+
+    <span class="sidebar-grid">
+        <li (click)="setCurrentBrand(brand)" [class]="getCurrentBrand(brand)" routerLink="/cars/brand/{{brand.id}}">
+            {{brand.name}} </li>
+        <button routerLink="/brand/update/{{brand.id}}" class="btn btn-outline-primary"><i
+                class="fas fa-pencil-alt"></i></button>
     </span>
-</ul>
+</ul> -->

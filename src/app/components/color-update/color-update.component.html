@@ -1,10 +1,16 @@
-<div class="container">
+<app-section-background 
+data="Renk Güncelleme Sayfası"
+>
+
+</app-section-background>
+
+<div class="container mb-5">
     <div class="row">
         <div class="col-md-12">
             <form [formGroup]="colorUpdateForm" >
                 <div class="form-group">
                     <label for="name">Renk Adı</label>
-                    <input formControlName="name" type="text" name="name" class="form-control">
+                    <input [(ngModel)]="color.name" formControlName="name" type="text" name="name" class="form-control">
                 </div>
                 <button 
                 (click)="updateBrand()"

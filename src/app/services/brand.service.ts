@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
 import { Brand } from '../models/brand';
 import { ResponseModel } from '../models/responseModel';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 
 @Injectable({
@@ -22,6 +23,12 @@ export class BrandService {
       .get<ListResponseModel<Brand>>(newApiUrl);
   }
 
+  getBrandId(id:number) : Observable<SingleResponseModel<Brand>>{
+    let newApiUrl = this.apiUrl + "getBrandByID?id=" + id;
+
+    return this.httpClient.get<SingleResponseModel<Brand>>(newApiUrl);
+  }
+
   addBrand(brand:Brand): Observable<ResponseModel>{
     
     let newApiUrl = this.apiUrl + "add";
@@ -34,6 +41,12 @@ export class BrandService {
   updateBrand(brand:Brand): Observable<ResponseModel>{
 
     let newApiUrl = this.apiUrl + "update";
+
+    return this.httpClient.post<ResponseModel>(newApiUrl, brand);
+  }
+
+  deleteBrand(brand:Brand):Observable<ResponseModel>{
+    let newApiUrl = this.apiUrl + "delete";
 
     return this.httpClient.post<ResponseModel>(newApiUrl, brand);
   }

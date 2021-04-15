@@ -1,3 +1,5 @@
+<app-section-background data="Araç Detay Sayfası"></app-section-background>
+
 <div class="row mt-4 ml-0 mr-0">
     <div class="col-md-8 offset-md-2">
         <div id="carouselExampleIndicators" class="carousel slide z-index-10" data-ride="carousel">
@@ -53,9 +55,10 @@
             </table>
 
             <button 
-            *ngIf="user.customerFindexPoint > carDetail.carFindexPoint"
+            *ngIf="(user.customerFindexPoint > carDetail.carFindexPoint) && !isCarRentedBySomeone"
             (click)="isCarAvailable(carDetail.id)"
             [hidden]="!showCarAvail"
+            
             routerLink="/rental/add/{{carDetail.id}}"
             
             class="btn btn-outline-success">Kirala</button>
@@ -66,6 +69,10 @@
 
             <div *ngIf="user.customerFindexPoint < carDetail.carFindexPoint" class="alert alert-danger" role="alert">
                 Findex puanınız bu aracı kiralamak için yeterli değildir.
+            </div>
+
+            <div *ngIf="isCarRentedBySomeone" class="alert alert-danger" role="alert">
+                Araç şuanda başkası taradından kiralık durumdadır. Lütfen başka bir araç seçiniz!
             </div>
         </div>
     </div>

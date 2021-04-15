@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ColorUpdateComponent } from './color-update.component';
+import { SectionBackgroundComponent } from './section-background.component';
 
-describe('ColorUpdateComponent', () => {
-  let component: ColorUpdateComponent;
-  let fixture: ComponentFixture<ColorUpdateComponent>;
+describe('SectionBackgroundComponent', () => {
+  let component: SectionBackgroundComponent;
+  let fixture: ComponentFixture<SectionBackgroundComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ColorUpdateComponent ]
+      declarations: [ SectionBackgroundComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ColorUpdateComponent);
+    fixture = TestBed.createComponent(SectionBackgroundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

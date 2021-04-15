@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -7,6 +8,7 @@ import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
 import { Customer } from 'src/app/models/customer';
 import { CustomerDetail } from 'src/app/models/customerDetail';
+import { Rental } from 'src/app/models/rental';
 import { User } from 'src/app/models/user';
 import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarImageService } from 'src/app/services/car-image.service';
@@ -20,7 +22,8 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-rental-add',
   templateUrl: './rental-add.component.html',
-  styleUrls: ['./rental-add.component.scss']
+  styleUrls: ['./rental-add.component.scss'],
+  providers: [DatePipe]
 })
 export class RentalAddComponent implements OnInit {
 
@@ -28,11 +31,14 @@ export class RentalAddComponent implements OnInit {
   customersDetails : CustomerDetail[];
   carDetail: Car;
   
+  
   rentDate: Date;
   returnDate: Date;
   totalPrice:number;
 
   carImages : CarImage[];
+
+  minDate: string | any;
 
   user:User;
 
@@ -46,7 +52,8 @@ export class RentalAddComponent implements OnInit {
     private cartService:CartService,
     private toastrService:ToastrService,
     private localStorageService:LocalStorageService,
-    private userService:UserService) { }
+    private userService:UserService,
+    private datePipe:DatePipe) { }
 
   ngOnInit(): void {
     this.createRentalAddForm();
@@ -122,14 +129,28 @@ export class RentalAddComponent implements OnInit {
       // rentalModel.customerId = this.rentalAddForm.value.customerId;
       rentalModel.customerId = this.user.id;
 
-      this.rentalService.setRental(rentalModel);
+      this.checkRentDateBeforeToday();
+      
+      if(this.checkReturnDateBiggerThanRentDate()){
+        this.toastrService.error("Kiralama tarihi, aracı teslim tarihinden önce gelmelidir.", "Tarih Hatası!")
+      }
+      else if(this.checkRentDateSameDayReturnDate()){
+        this.toastrService.warning("Teslim Tarihini en erken yarın seçebilirsiniz!")
+      }
+      else if(this.checkRentDateBeforeToday()){
+        this.toastrService.error("Kiralama tarihi bugünden önce olamaz!", "Tarih Hatası!")
+      }
+      else{
+        this.rentalService.setRental(rentalModel);
 
-      //Sepete eklenmesi
-      this.cartService.addToCart(rentalModel);
-      this.toastrService.info("Sepete eklendi", this.carDetail.carName);
+        //Sepete eklenmesi
+        this.cartService.addToCart(rentalModel);
+        this.toastrService.info("Sepete eklendi", this.carDetail.carName);
 
-      //localStorage'a eklenmesi
-      //this.localStorageService.setItem("rentalInfo", JSON.stringify(rentalModel))
+        //localStorage'a eklenmesi
+        //this.localStorageService.setItem("rentalInfo", JSON.stringify(rentalModel))
+      }
+     
     }
     else{
       this.toastrService.error("Lütfen ilgili yerleri doldurunuz", "Hata!");
@@ -152,4 +173,43 @@ export class RentalAddComponent implements OnInit {
       this.totalPrice = dateDiff * this.carDetail.dailyPrice;
     }
   }
+
+  //Tarih kontrol işlemleri
+
+  checkReturnDateBiggerThanRentDate(){
+    let startDate = new Date(this.rentalAddForm.value.rentDate);
+    let endDate = new Date(this.rentalAddForm.value.returnDate);
+
+    if(startDate > endDate){
+      return true;
+    }
+    return false;
+  }
+
+  checkRentDateBeforeToday(){
+    let startDate = new Date(this.rentalAddForm.value.rentDate);
+    let today = new Date();
+
+    if(today.getDay() > startDate.getDay() && today.getMonth() >= startDate.getMonth() && today.getFullYear() >= startDate.getFullYear() ){
+      return true;
+    }
+    return false;
+  }
+
+  checkRentDateSameDayReturnDate(){
+    let startDate = new Date(this.rentalAddForm.value.rentDate);
+    let endDate = new Date(this.rentalAddForm.value.returnDate);
+
+    if(startDate.getFullYear() === endDate.getFullYear() && startDate.getMonth() === endDate.getMonth() && startDate.getDay() === endDate.getDay()){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  // getRentMinDate(){
+  //   this.minDate = this.datePipe.transform(new Date, 'yyyy-mm-dd');
+  //   return this.minDate;
+  // }
 }

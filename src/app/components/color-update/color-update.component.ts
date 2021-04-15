@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Color } from 'src/app/models/color';
 import { ColorService } from 'src/app/services/color.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class ColorUpdateComponent implements OnInit {
 
   colorUpdateForm: FormGroup;
   colorId:number;
+  color:Color;
 
   constructor(private formBuilder:FormBuilder,
     private colorService:ColorService,
@@ -26,6 +28,7 @@ export class ColorUpdateComponent implements OnInit {
       .subscribe((param) => {
         if(param["colorId"]){
           this.colorId = param["colorId"]
+          this.getColorById(param["colorId"])
         }
       })
   }
@@ -67,5 +70,12 @@ export class ColorUpdateComponent implements OnInit {
     else{
       this.toastrService.error("Lütfen ilgili yerleri doldurunuz.", "Hata!");
     }
+  }
+
+  getColorById(id:number){
+    this.colorService.getColorById(id)
+      .subscribe((response) => {
+        this.color = response.data;
+      })
   }
 }

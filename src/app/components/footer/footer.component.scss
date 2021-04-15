@@ -1,0 +1,46 @@
+footer{
+    background-color: #1c1c1c;
+    padding: 80px 0 0 0;
+    color: rgba(255,255,255,.6);;
+}
+
+.brand-logo{
+    color: white;
+    font-size: 33px;
+
+    &:hover{
+        text-decoration: none;
+
+    }
+}
+
+.widget{
+    & h5{
+        margin-bottom: 25px;
+        color: #fff;
+    }
+
+    & p{
+        font-size: 17px;
+        line-height: 1.8rem;
+        font-weight: 500;
+    }
+
+    & ul{
+        padding: 0 0 20px;
+
+        & li{
+            list-style: none;
+            padding: 5px 0;
+
+            & a{
+                color: rgba(255,255,255,.6);;
+            }
+
+            &:hover a{
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+    }
+}

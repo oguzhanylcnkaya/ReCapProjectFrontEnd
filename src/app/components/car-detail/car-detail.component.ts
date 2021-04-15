@@ -3,6 +3,7 @@ import { ActivatedRoute,  } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
+import { Rental } from 'src/app/models/rental';
 import { User } from 'src/app/models/user';
 import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarImageService } from 'src/app/services/car-image.service';
@@ -19,6 +20,7 @@ export class CarDetailComponent implements OnInit {
 
   carDetail: Car;
   user:User;
+  modelYear: Date;
 
   carImages: CarImage[] = [];
   carImageBasePath = "https://localhost:44306/images/";
@@ -28,6 +30,10 @@ export class CarDetailComponent implements OnInit {
   showFindexAvail:boolean = false;
 
   showAlert:boolean = false;
+
+  carId:number;
+  isCarRentedBySomeone: boolean;
+  rentalLastInfo:Rental;
 
   constructor(private activatedRoute: ActivatedRoute,
     private carDetailService: CarDetailService,
@@ -41,6 +47,7 @@ export class CarDetailComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((param) => {
       if(param["carId"]){
+        this.carId = param["carId"];
         this.getCarDetailByCarId(param["carId"]);
         this.isCarAvailable(param["carId"]);
       }
@@ -49,12 +56,15 @@ export class CarDetailComponent implements OnInit {
       this.getUser();
 
     });
+
+    this.checkCarIsAvailable();
   }
 
   getCarDetailByCarId(carId: number){
     this.carDetailService.getCarDetailByCarId(carId)
     .subscribe((response) => {
       this.carDetail = response.data[0];
+      this.modelYear = new Date(this.carDetail.modelYear);
       console.log(this.carDetail);
     });
   }
@@ -95,6 +105,31 @@ export class CarDetailComponent implements OnInit {
         this.showAlert = true;
       })
 
+  }
+
+  //Aracın başkası tarafından kiralanıp geri getirme tarihi kontrolü
+  checkCarIsAvailable(){
+    this.rentalService.getRentalByCarId(this.carId)
+      .subscribe((response) => {
+        
+        if(response.data.length > 0){
+
+          this.rentalLastInfo = response.data[response.data.length -1]
+          
+          var returnDate = new Date(this.rentalLastInfo.returnDate);
+          var today = new Date();
+
+          if(returnDate >= today){
+            this.toastrService.error("Araç şuanda başkası taradından kiralık durumdadır.")
+            this.isCarRentedBySomeone = true;
+          }
+
+        }
+        else{
+          console.log("Araç daha önce hiç kiralanmamış!!")
+        }
+        
+      })
   }
 
 }

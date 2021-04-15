@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Color } from 'src/app/models/color';
@@ -24,7 +25,8 @@ export class CarAddComponent implements OnInit {
     private colorService:ColorService,
     private formBuilder:FormBuilder,
     private carService:CarService,
-    private toastrService:ToastrService) { }
+    private toastrService:ToastrService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -76,7 +78,8 @@ export class CarAddComponent implements OnInit {
 
       this.carService.addCar(carModel)
         .subscribe((response) => {
-            this.toastrService.success(response.message, "Başarılı!")
+            this.toastrService.success(response.message, "Başarılı!");
+            this.router.navigate(["/car-page"])
         }, responseError => {
           console.log(responseError);
 

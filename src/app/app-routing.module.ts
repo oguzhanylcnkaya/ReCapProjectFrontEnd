@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
+import { BrandComponent } from './components/brand/brand.component';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
+import { CarPageComponent } from './components/car-page/car-page.component';
 import { CarUpdateComponent } from './components/car-update/car-update.component';
 import { CarComponent } from './components/car/car.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ColorAddComponent } from './components/color-add/color-add.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
+import { ColorComponent } from './components/color/color.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PaymentComponent } from './components/payment/payment.component';
@@ -36,7 +39,16 @@ const routes: Routes = [
   {path: "cart", component: CartComponent},
   {path: "payment", component: PaymentComponent},
   {path:"login", component:LoginComponent},
-  {path: "profile", component: UserDetailComponent}
+  {path: "profile", component: UserDetailComponent},
+
+  {path: "car-page", component:CarPageComponent},
+  {path: "car-page/brand/:brandId", component:CarPageComponent},
+  {path: "car-page/color/:colorId", component:CarPageComponent},
+  {path: "car-page/brand/:brandId/color/:colorId", component:CarPageComponent},
+
+  {path: "brand", component:BrandComponent},
+  {path: "color", component: ColorComponent}
+
 ];
 
 @NgModule({

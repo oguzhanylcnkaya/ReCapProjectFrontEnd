@@ -30,6 +30,9 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { HomeComponent } from './components/home/home.component';
+import { SectionBackgroundComponent } from './components/section-background/section-background.component';
+import { CarPageComponent } from './components/car-page/car-page.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { HomeComponent } from './components/home/home.component';
     LoginComponent,
     UserDetailComponent,
     HomeComponent,
+    SectionBackgroundComponent,
+    CarPageComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

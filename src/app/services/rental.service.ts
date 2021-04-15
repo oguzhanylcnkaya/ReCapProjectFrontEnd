@@ -24,6 +24,14 @@ export class RentalService {
       .get<ListResponseModel<RentalDetail>>(newApiUrl);
   }
 
+  getRentalByCarId(carId:number):Observable<ListResponseModel<Rental>>{
+
+    let newApiUrl = this.apiUrl + "getrentalbycarid?carId=" + carId;
+
+    return this.httpClient.get<ListResponseModel<Rental>>(newApiUrl);
+
+  }
+
   rentalAdd(rental:Rental): Observable<ResponseModel>{
 
     let newApiUrl = this.apiUrl + "add";

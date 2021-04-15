@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brand.service';
 
@@ -10,10 +11,14 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandComponent implements OnInit {
 
   currentBrand: Brand;
+
   brands: Brand[] = [];
   filterBrand = "";
 
-  constructor(private brandService: BrandService) { }
+  brand:Brand;
+
+  constructor(private brandService: BrandService,
+    private toastrService:ToastrService) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -26,29 +31,22 @@ export class BrandComponent implements OnInit {
       });
   }
 
-  setCurrentBrand(brand: Brand){
-    this.currentBrand = brand;
+  getBrandId(id:number){
+    return this.brandService.getBrandId(id);
   }
 
-  getCurrentBrand(brand: Brand){
+  deleteBrand(id:number){
 
-    if(this.currentBrand === brand){
-      return "list-group-item active"
-    }
-    else{
-      return "list-group-item"
-    }
-  }
+    this.getBrandId(id)
+      .subscribe((response) => {
+        this.brand = response.data;
 
-  getAllBrandsClass(){
-
-    if(!this.currentBrand){
-      return "list-group-item active"
-    }
-    else{
-      return "list-group-item"
+        this.brandService.deleteBrand(this.brand)
+          .subscribe((response) => {
+            this.toastrService.success(response.message, "Marka Silindi");
+            this.ngOnInit();
+          })
+      })
     
-    }
   }
-
 }

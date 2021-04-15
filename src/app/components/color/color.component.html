@@ -1,27 +1,48 @@
-<div class="my-4 d-flex">
-    <input placeholder="Renk Ara" type="text" class="form-control" [(ngModel)]="colorFilter">
-    <button 
-    routerLink="/color/add"
-    class="btn btn-outline-success"><span>+</span></button>
+<app-section-background data="Renkler"></app-section-background>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-3">
+            <input placeholder="Renk Ara" type="text" class="form-control" [(ngModel)]="colorFilter">
+        </div>
+        <div class="col-md-4">
+            <button routerLink="/color/add" class="btn btn-outline-success">
+                <span>Renk Ekle</span></button>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <table class="table  table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Renk Adı</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let color of colors | colorFilterPipe:colorFilter">
+                        <td>{{color.id}}</td>
+                        <td>{{color.name}}</td>
+                        <td class="td-button">
+                            <button 
+                            routerLink="/color/update/{{color.id}}" 
+                            class="btn btn-outline-primary">
+                            <i class="fas fa-pencil-alt"></i> Güncelle</button>
+                            <button 
+                            (click)="deleteColor(color.id)"
+                            class="btn btn-outline-danger"
+                            >
+                                <i class="fas fa-trash-alt"></i> Sil
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 </div>
 
-<ul class="list-group">
-    <li
-    [class]="getAllColorClass()"
-    routerLink="/cars"
-    >Tüm Renkler</li>
-    <span
-    class="sidebar-grid"
-    *ngFor="let color of colors | colorFilterPipe:colorFilter"
-    >
-         <li 
-    [class]="getCurrentClass(color)"
-    (click)="setCurrentColor(color)"
-    routerLink="/cars/color/{{color.id}}"
-    >{{color.name}}</li>
-    <button 
-    routerLink="/color/update/{{color.id}}"
-    class="btn btn-outline-primary"><i class="fas fa-pencil-alt"></i></button>
-    </span>
-   
-</ul>
+

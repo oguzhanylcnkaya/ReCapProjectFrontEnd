@@ -4,4 +4,12 @@
     align-items: center;
 }
 
+table{
+    text-align: center;
+
+    & tbody tr .td-button button{
+        margin: 0 5px;
+    }
+}
+
 
