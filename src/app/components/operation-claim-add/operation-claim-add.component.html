@@ -1,0 +1,27 @@
+<app-section-background
+data="Rol Ekleme Sayfası"
+>
+
+</app-section-background>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="operationClaimAddForm">
+                <div class="form-group">
+                    <label for="name">Rol Adı</label>
+                    <input 
+                    formControlName="name"
+                    class="form-control"
+                    type="text" name="name" id="name">
+                </div>
+                <button
+                (click)="add()"
+                class="btn btn-dark"
+                >
+                    Ekle
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
 import { Color } from 'src/app/models/color';
@@ -17,6 +18,7 @@ import { HomeComponent } from '../home/home.component';
 export class CarComponent implements OnInit {
 
   cars : Car[] = [];
+  car:Car;
   carImageBasePath = "https://localhost:44306/images/";
   carNameFilter = "";
 
@@ -33,7 +35,8 @@ export class CarComponent implements OnInit {
     private rentalService:RentalService,
     private brandService:BrandService,
     private colorService:ColorService,
-    private router:Router) { }
+    private router:Router,
+    private toastrService:ToastrService) { }
 
   ngOnInit(): void {
 
@@ -168,5 +171,22 @@ export class CarComponent implements OnInit {
 
   classColorId(id:number){
     this.colorService.setClassColorId(id);
+  }
+
+  getCarByCarId(id:number){
+    return this.carService.getCarById(id);
+  }
+
+  deleteCar(id:number){
+    this.getCarByCarId(id)
+      .subscribe((response) => {
+        this.car = response.data;
+
+        this.carService.deleteCar(this.car)
+          .subscribe((response) => {
+            this.toastrService.success(response.message, "Araç Silindi!")
+            this.ngOnInit();
+          })
+      })
   }
 }

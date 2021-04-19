@@ -55,7 +55,7 @@
             </table>
 
             <button 
-            *ngIf="(user.customerFindexPoint > carDetail.carFindexPoint) && !isCarRentedBySomeone"
+            *ngIf="!isCarRentedBySomeone && isAuth && (user.customerFindexPoint >= carDetail.carFindexPoint)"
             (click)="isCarAvailable(carDetail.id)"
             [hidden]="!showCarAvail"
             
@@ -63,17 +63,23 @@
             
             class="btn btn-outline-success">Kirala</button>
             
-            <div *ngIf="showAlert" class="alert alert-danger mt-5" role="alert">
+            <div *ngIf="!isAuth" class="alert alert-danger">
+                Araç kiralama işlemleri için giriş yapmanız gerekmektedir.
+            </div>
+
+            <div *ngIf="showAlert && isAuth" class="alert alert-danger mt-5" role="alert">
                 Araç başkası tarafından kiralık durumdadır!
             </div>
 
-            <div *ngIf="user.customerFindexPoint < carDetail.carFindexPoint" class="alert alert-danger" role="alert">
+            <div *ngIf="(user.customerFindexPoint < carDetail.carFindexPoint) && isAuth" class="alert alert-danger" role="alert">
                 Findex puanınız bu aracı kiralamak için yeterli değildir.
             </div>
 
             <div *ngIf="isCarRentedBySomeone" class="alert alert-danger" role="alert">
                 Araç şuanda başkası taradından kiralık durumdadır. Lütfen başka bir araç seçiniz!
             </div>
+
+            
         </div>
     </div>
 </div>

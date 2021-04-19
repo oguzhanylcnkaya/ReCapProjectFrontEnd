@@ -25,6 +25,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.isAuthenticated();
     this.getUserById();
+
+    //this.activeClass();
+    this.scrollNavbar();
   }
 
   isAuthenticated(){
@@ -51,4 +54,27 @@ export class NavbarComponent implements OnInit {
     
   }
 
+  // activeClass(){
+  //   var headerElement = document.querySelectorAll(".navbar-nav .nav-item");
+
+  //   headerElement.forEach((item) => {
+      
+  //     item.cl
+  //   })
+  // }
+
+  scrollNavbar(){
+    window.addEventListener("scroll", () => {
+      var scroll = window.scrollY;
+      var navComp = document.querySelector(".navbar-comp");
+      var bgDark = document.querySelector(".bg-dark");
+      
+      if(scroll > 200){
+        navComp?.classList.add("header-sticky");
+      }
+      else{
+        navComp?.classList.remove("header-sticky")
+      }
+    })
+  }
 }

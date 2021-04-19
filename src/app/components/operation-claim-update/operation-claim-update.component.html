@@ -1,0 +1,29 @@
+<app-section-background
+data="Rol Güncelleme Sayfası"
+>
+
+</app-section-background>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="operationClaimUpdateForm">
+                <div class="form-group">
+                    <label for="">Rol Adı</label>
+                    <input 
+                    [(ngModel)]="operationClaim.name"
+                    formControlName="name"
+                    class="form-control"
+                    type="text" name="name" id="name">
+                </div>
+                <button
+                (click)="update()"
+                class="btn btn-outline-primary"
+                >
+                    Güncelle
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>

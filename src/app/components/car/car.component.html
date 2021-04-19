@@ -68,6 +68,8 @@
               
               <span class="buton-space">
                   <a routerLink="/cars/detail/{{car.id}}" class="btn btn-outline-dark mt-2">Detay</a>
+
+                  <a (click)="deleteCar(car.id)" class="btn btn-outline-danger mt-2" >Sil</a>
                   <!-- <a routerLink="/rental/add/{{car.id}}" class="btn btn-outline-success mt-2">Kirala</a> -->
                 <a routerLink="/cars/update/{{car.id}}" class="btn btn-outline-primary mt-2">Güncelle</a>
               </span> 

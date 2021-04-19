@@ -72,4 +72,12 @@
     position: relative;
     z-index: 22;
     width: 100%;
+    top: 0;
+    transition: .5s;
+}
+
+.header-sticky{
+    transition: .5s;
+    position: sticky;
+    background-color: #1c1c1c !important;
 }

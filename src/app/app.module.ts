@@ -33,6 +33,9 @@ import { HomeComponent } from './components/home/home.component';
 import { SectionBackgroundComponent } from './components/section-background/section-background.component';
 import { CarPageComponent } from './components/car-page/car-page.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { OperationClaimComponent } from './components/operation-claim/operation-claim.component';
+import { OperationClaimAddComponent } from './components/operation-claim-add/operation-claim-add.component';
+import { OperationClaimUpdateComponent } from './components/operation-claim-update/operation-claim-update.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,9 @@ import { FooterComponent } from './components/footer/footer.component';
     SectionBackgroundComponent,
     CarPageComponent,
     FooterComponent,
+    OperationClaimComponent,
+    OperationClaimAddComponent,
+    OperationClaimUpdateComponent,
   ],
   imports: [
     BrowserModule,

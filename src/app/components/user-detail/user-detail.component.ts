@@ -42,6 +42,7 @@ export class UserDetailComponent implements OnInit {
       passwordHash : [this.localStorageService.getItem("passwordHash"), Validators.nullValidator],
       passwordSalt : [this.localStorageService.getItem("passwordSalt"), Validators.nullValidator],
       status : [this.localStorageService.getItem("status"),Validators.nullValidator],
+      customerFindexPoint: [this.localStorageService.getItem("customerFindexPoint"), Validators.nullValidator]
     });
   }
 
@@ -51,10 +52,16 @@ export class UserDetailComponent implements OnInit {
       let userModel = Object.assign({}, this.updateUserForm.value);
       userModel.id = Number(userModel.id);
       userModel.status = Boolean(userModel.status);
+      userModel.customerFindexPoint = Number(userModel.customerFindexPoint);
 
       this.userService.updateUser(userModel)
         .subscribe((response) => {
-          this.toastrService.success(response.message, "Başarılı!!")
+          this.toastrService.success(response.message, "Başarılı!!");
+          this.localStorageService.setItem("firstName", userModel.firstName);
+          this.localStorageService.setItem("lastName", userModel.lastName);
+          this.localStorageService.setItem("email", userModel.email);
+
+          this.ngOnInit();
         }, responseError => {
           console.log(responseError);
         })

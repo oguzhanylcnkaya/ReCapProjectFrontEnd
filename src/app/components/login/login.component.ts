@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
       email : ["", Validators.required],
       password : ["", Validators.required],
       firstName: ["", Validators.required],
-      lastName: ["", Validators.required]
+      lastName: ["", Validators.required],
+      customerFindexPoint : [""]
     });
   }
 
@@ -65,6 +66,7 @@ export class LoginComponent implements OnInit {
               this.localStorageService.setItem("passwordHash", response.data.passwordHash);
               this.localStorageService.setItem("passwordSalt", response.data.passwordSalt);
               this.localStorageService.setItem("status", response.data.status);
+              this.localStorageService.setItem("customerFindexPoint", response.data.customerFindexPoint);
             })
 
           this.router.navigate(["/"]);
@@ -90,6 +92,7 @@ export class LoginComponent implements OnInit {
   register(){
     if(this.registerForm.valid){
       let registerModel = Object.assign({}, this.registerForm.value);
+      registerModel.customerFindexPoint = Number(1000);
 
       this.authService.register(registerModel)
         .subscribe((response) => {
@@ -100,9 +103,9 @@ export class LoginComponent implements OnInit {
         }, responseError => {
           console.log(responseError);
 
-          if(responseError.error.Errors.length > 0){
+          if(responseError.error.length > 0){
 
-            this.toastrService.error(responseError.error.Message, "Hata!");
+            this.toastrService.error(responseError.error, "Hata!");
           }
         })
     }

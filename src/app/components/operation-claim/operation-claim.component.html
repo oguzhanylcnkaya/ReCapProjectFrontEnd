@@ -1,0 +1,50 @@
+<app-section-background 
+data="Rol Listesi"
+>
+
+</app-section-background>
+
+<div class="container">
+    <div class="row">
+        <!-- <div class="col-md-4 offset-md-3">
+            <input type="text" class="form-control" placeholder="Marka Ara">
+        </div> -->
+        <div class="col-md-4">
+            <button routerLink="/operationClaim/add" class="btn btn-outline-success">
+                <span>Rol Ekle</span></button>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Rol Adı</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let operationClaim of operationClaims">
+                        <td>{{operationClaim.id}}</td>
+                        <td>{{operationClaim.name}}</td>
+                        <td class="m-side-btn">
+                            <button
+                            routerLink="/operationClaim/update/{{operationClaim.id}}"
+                            class="btn btn-outline-primary"
+                            >
+                                <i class="fas fa-pencil-alt"></i> Güncelle
+                            </button>
+                            <button
+                            (click)="delete(operationClaim.id)"
+                            class="btn btn-outline-danger"
+                            >
+                                <i class="fas fa-trash-alt"></i> Sil
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

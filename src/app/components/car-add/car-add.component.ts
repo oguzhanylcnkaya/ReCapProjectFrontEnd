@@ -98,4 +98,13 @@ export class CarAddComponent implements OnInit {
 
   }
 
+  // maxFindexPoint(carFindexPoint:number){
+  //   if(carFindexPoint > 1900){
+  //     return 1900;
+  //   }
+  //   else{
+  //     return carFindexPoint;
+  //   }
+  // }
+
 }

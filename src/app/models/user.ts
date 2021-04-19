@@ -6,6 +6,5 @@ export interface User{
     passwordHash: string;
     passwordSalt:string;
     status:boolean;
-
     customerFindexPoint:number;
 }

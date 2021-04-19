@@ -5,6 +5,7 @@ import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
 import { Rental } from 'src/app/models/rental';
 import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -35,15 +36,20 @@ export class CarDetailComponent implements OnInit {
   isCarRentedBySomeone: boolean;
   rentalLastInfo:Rental;
 
+  isAuth:boolean;
+
   constructor(private activatedRoute: ActivatedRoute,
     private carDetailService: CarDetailService,
     private carImageService: CarImageService,
     private rentalService:RentalService,
     private toastrService:ToastrService,
     private userService:UserService,
-    private localStorageService:LocalStorageService) { }
+    private localStorageService:LocalStorageService,
+    private authService:AuthService) { }
 
   ngOnInit(): void {
+    this.isAuthenticated();
+    this.getUser();
 
     this.activatedRoute.params.subscribe((param) => {
       if(param["carId"]){
@@ -53,8 +59,7 @@ export class CarDetailComponent implements OnInit {
       }
 
       this.getCarImageByCarId();
-      this.getUser();
-
+    
     });
 
     this.checkCarIsAvailable();
@@ -131,5 +136,11 @@ export class CarDetailComponent implements OnInit {
         
       })
   }
+
+  isAuthenticated(){
+    this.isAuth = this.authService.isAuthenticated();
+   
+  }
+
 
 }

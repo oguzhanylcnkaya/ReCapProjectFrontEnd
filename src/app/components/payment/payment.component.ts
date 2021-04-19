@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Card } from 'src/app/models/card';
 import { Rental } from 'src/app/models/rental';
+import { User } from 'src/app/models/user';
 import { CardService } from 'src/app/services/card.service';
 import { CartService } from 'src/app/services/cart.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { RentalService } from 'src/app/services/rental.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-payment',
@@ -26,17 +29,26 @@ export class PaymentComponent implements OnInit {
 
   cards: Card[];
 
+  user:User;
+
   constructor(private formBuilder:FormBuilder,
     private paymentService:PaymentService,
     private cartService:CartService,
     private toastrService:ToastrService,
     private rentalService:RentalService,
     private cardService:CardService,
-    private localStorageService:LocalStorageService) { }
+    private localStorageService:LocalStorageService,
+    private userService:UserService,
+    private router:Router) { }
 
   ngOnInit(): void {
 
     this.customerId = Number(this.localStorageService.getItem("userId"));
+    this.userService.getUserById(this.customerId)
+      .subscribe((response) => {
+        this.user = response.data;
+        
+      });
 
     this.cartService.data
       .subscribe((response) => {
@@ -87,9 +99,12 @@ export class PaymentComponent implements OnInit {
             this.addCart();
           }
 
+          this.plusUserFindexPoint();
+
           this.rentalService.rentalAdd(this.rentalInfo)
           .subscribe((resp) => {
             this.toastrService.info(resp.message, "Aracı Kiraladınız!");
+            this.router.navigate(["/"]);
           }, respError => {
             console.log(respError)
           })
@@ -161,6 +176,28 @@ export class PaymentComponent implements OnInit {
       this.rentalInfo.returnDate = new Date(this.rentalInfo.returnDate);
     }
 
+  }
+
+  plusUserFindexPoint(){
+    if(Number(this.user.customerFindexPoint) < 1900){
+
+      this.user = {
+        email : this.user.email,
+        id : this.user.id,
+        firstName : this.user.firstName,
+        lastName : this.user.lastName,
+        status : this.user.status,
+        passwordHash : this.user.passwordHash,
+        passwordSalt : this.user.passwordSalt,
+        customerFindexPoint : Number(this.user.customerFindexPoint) + 100
+      }
+
+      this.userService.updateUser(this.user)
+        .subscribe((response) => {
+          this.toastrService.success("Aracı başarıyla kiraladığınız için 100 artı findex puan kazandınız!")
+        })
+
+    }
   }
 
 }

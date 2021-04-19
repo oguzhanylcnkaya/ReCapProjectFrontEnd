@@ -14,6 +14,9 @@ import { ColorUpdateComponent } from './components/color-update/color-update.com
 import { ColorComponent } from './components/color/color.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { OperationClaimAddComponent } from './components/operation-claim-add/operation-claim-add.component';
+import { OperationClaimUpdateComponent } from './components/operation-claim-update/operation-claim-update.component';
+import { OperationClaimComponent } from './components/operation-claim/operation-claim.component';
 import { PaymentComponent } from './components/payment/payment.component';
 
 import { RentalAddComponent } from './components/rental-add/rental-add.component';
@@ -47,7 +50,11 @@ const routes: Routes = [
   {path: "car-page/brand/:brandId/color/:colorId", component:CarPageComponent},
 
   {path: "brand", component:BrandComponent},
-  {path: "color", component: ColorComponent}
+  {path: "color", component: ColorComponent},
+
+  {path:"operationClaim", component:OperationClaimComponent},
+  {path:"operationClaim/add", component:OperationClaimAddComponent},
+  {path: "operationClaim/update/:id", component:OperationClaimUpdateComponent}
 
 ];
 
