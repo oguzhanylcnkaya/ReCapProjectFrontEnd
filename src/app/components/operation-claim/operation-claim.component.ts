@@ -13,6 +13,8 @@ export class OperationClaimComponent implements OnInit {
   operationClaims :OperationClaim[];
   operationClaim : OperationClaim;
 
+  searchRolNameFilter:string;
+
   constructor(private operationClaimService:OperationClaimService,
     private toastrService:ToastrService) { }
 

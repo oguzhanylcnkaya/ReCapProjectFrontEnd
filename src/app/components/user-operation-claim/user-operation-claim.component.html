@@ -1,5 +1,5 @@
 <app-section-background 
-data="Rol Listesi"
+data="Kullanıcı Rol Listesi"
 >
 
 </app-section-background>
@@ -7,11 +7,11 @@ data="Rol Listesi"
 <div class="container">
     <div class="row">
         <div class="col-md-4 offset-md-3">
-            <input [(ngModel)]="searchRolNameFilter" type="text" class="form-control" placeholder="Rol Adı Ara">
+            <input [(ngModel)]="userRolFilter" type="text" class="form-control" placeholder="Kullanıcı Ara">
         </div>
         <div class="col-md-4">
-            <button routerLink="/operationClaim/add" class="btn btn-outline-success">
-                <span>Rol Ekle</span></button>
+            <button routerLink="/userOperationClaim/add" class="btn btn-outline-success">
+                <span>Rol Ata</span></button>
         </div>
     </div>
     <div class="row mt-4">
@@ -21,22 +21,24 @@ data="Rol Listesi"
                     <tr>
                         <th>Id</th>
                         <th>Rol Adı</th>
+                        <th>Kullanıcı Adı</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let operationClaim of operationClaims | rolFilter:searchRolNameFilter ">
-                        <td>{{operationClaim.id}}</td>
-                        <td>{{operationClaim.name}}</td>
+                    <tr *ngFor="let userOperationClaim of userOperationClaimDetails | userRolFilter:userRolFilter">
+                        <td>{{userOperationClaim.id}}</td>
+                        <td>{{userOperationClaim.operationName}}</td>
+                        <td>{{userOperationClaim.userFullName}}</td>
                         <td class="m-side-btn">
                             <button
-                            routerLink="/operationClaim/update/{{operationClaim.id}}"
+                            routerLink="/userOperationClaim/update/{{userOperationClaim.id}}"
                             class="btn btn-outline-primary"
                             >
                                 <i class="fas fa-pencil-alt"></i> Güncelle
                             </button>
                             <button
-                            (click)="delete(operationClaim.id)"
+                            (click)="delete(userOperationClaim.id)"
                             class="btn btn-outline-danger"
                             >
                                 <i class="fas fa-trash-alt"></i> Sil

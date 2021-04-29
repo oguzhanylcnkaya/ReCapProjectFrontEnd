@@ -5,6 +5,7 @@ import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { UserOperationClaim } from '../models/userOperationClaim';
+import { UserOperationClaimDetails } from '../models/userOperationClaimDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,30 @@ export class UserOperationClaimService {
     let newApiUrl = this.apiUrl + "getbyoperationclaimid?operationClaimId="+operationClaimId;
 
     return this.httpClient.get<ListResponseModel<UserOperationClaim>>(newApiUrl);
+  }
+
+
+  getAllDetails():Observable<ListResponseModel<UserOperationClaimDetails>>{
+    let newApiUrl = this.apiUrl + "getalldetails";
+
+    return this.httpClient.get<ListResponseModel<UserOperationClaimDetails>>(newApiUrl);
+  }
+
+  getDetailsById(id:number):Observable<SingleResponseModel<UserOperationClaimDetails>>{
+    let newApiUrl = this.apiUrl + "getdetailsbyid?id="+ id;
+
+    return this.httpClient.get<SingleResponseModel<UserOperationClaimDetails>>(newApiUrl);
+  }
+
+  getDetailsByOperationClaimId(operationClaimId:number):Observable<ListResponseModel<UserOperationClaimDetails>>{
+    let newApiUrl = this.apiUrl + "getdetailsbyoperationclaimid?operationClaimId="+ operationClaimId;
+
+    return this.httpClient.get<ListResponseModel<UserOperationClaimDetails>>(newApiUrl);
+  }
+
+  getDetailsByUserId(userId:number):Observable<ListResponseModel<UserOperationClaimDetails>>{
+    let newApiUrl = this.apiUrl + "getdetailsbyuserid?userId="+ userId;
+
+    return this.httpClient.get<ListResponseModel<UserOperationClaimDetails>>(newApiUrl);
   }
 }

@@ -36,6 +36,11 @@ import { FooterComponent } from './components/footer/footer.component';
 import { OperationClaimComponent } from './components/operation-claim/operation-claim.component';
 import { OperationClaimAddComponent } from './components/operation-claim-add/operation-claim-add.component';
 import { OperationClaimUpdateComponent } from './components/operation-claim-update/operation-claim-update.component';
+import { UserOperationClaimComponent } from './components/user-operation-claim/user-operation-claim.component';
+import { UserOperationClaimAddComponent } from './components/user-operation-claim-add/user-operation-claim-add.component';
+import { UserOperationClaimUpdateComponent } from './components/user-operation-claim-update/user-operation-claim-update.component';
+import { RolFilterPipe } from './pipes/rol-filter.pipe';
+import { UserRolFilterPipe } from './pipes/user-rol-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -68,6 +73,11 @@ import { OperationClaimUpdateComponent } from './components/operation-claim-upda
     OperationClaimComponent,
     OperationClaimAddComponent,
     OperationClaimUpdateComponent,
+    UserOperationClaimComponent,
+    UserOperationClaimAddComponent,
+    UserOperationClaimUpdateComponent,
+    RolFilterPipe,
+    UserRolFilterPipe,
   ],
   imports: [
     BrowserModule,

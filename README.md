@@ -22,9 +22,7 @@ Bu projenin Frontend tarafında Angular kullanılmıştır. Services klasörü a
 
 ## Ana Sayfa
 ---
-![Ana Sayfa](./src/assets/readme/anasayfa.PNG)
-
-![Ana Sayfa](./src/assets/readme/anasayfa2.PNG)
+![Ana Sayfa](./src/assets/readme/anasayfa.png)
 
 - Yukarıdaki kısımda backend tarafından gelen araçlar listelenmektedir.
 - Yandaki sidebar da araç markaları ve renkler listelenmektedir.
@@ -60,17 +58,65 @@ Bu projenin Frontend tarafında Angular kullanılmıştır. Services klasörü a
 ---
 ![Kayıt Olma Sayfası](./src/assets/readme/kaydol.png)
 
+## Arabalar Sayfası
+---
+![Arabalar Sayfası](./src/assets/readme/araclar.png)
+
 ## Araba Ekleme Sayfası
 ---
 ![Araba Ekleme Sayfası](./src/assets/readme/arabaekle.png)
 
+## Araba Güncelleme Sayfası
+---
+![Araba Güncelleme Sayfası](./src/assets/readme/aracguncelle.png)
+
+## Markalar Sayfası
+---
+![Markalar Sayfası](./src/assets/readme/markalar.png)
+
 ## Marka Ekleme Sayfası
 ---
-![Araba Ekleme Sayfası](./src/assets/readme/markaekle.png)
+![Marka Ekleme Sayfası](./src/assets/readme/markaekle.png)
+
+## Marka Güncelleme Sayfası
+---
+![Marka Güncelleme Sayfası](./src/assets/readme/markaguncelle.png)
+
+## Renkler Sayfası
+---
+![Renkler Sayfası](./src/assets/readme/renkler.png)
 
 ## Renk Ekleme Sayfası
 ---
 ![Renk Ekleme Sayfası](./src/assets/readme/renkekle.png)
+
+## Renk Güncelleme Sayfası
+---
+![Renk Güncelleme Sayfası](./src/assets/readme/renkguncelle.png)
+
+## Roller Sayfası
+---
+![Roller Sayfası](./src/assets/readme/roller.png)
+
+## Rol Ekleme Sayfası
+---
+![Rol Ekleme Sayfası](./src/assets/readme/rolekle.png)
+
+## Rol Güncelleme Sayfası
+---
+![Rol Güncelleme Sayfası](./src/assets/readme/rolguncelle.png)
+
+## Kullanıcı Rolleri Sayfası
+---
+![Roller Sayfası](./src/assets/readme/kullaniciroller.png)
+
+## Kullanıcı Rol Atama Sayfası
+---
+![Rol Ekleme Sayfası](./src/assets/readme/kullanicirolekle.png)
+
+## Kullanıcı Rol Güncelleme Sayfası
+---
+![Rol Güncelleme Sayfası](./src/assets/readme/kullanicirolguncelle.png)
 
 ## Kullanıcı Dropdown'u
 ---
@@ -80,34 +126,7 @@ Bu projenin Frontend tarafında Angular kullanılmıştır. Services klasörü a
 ---
 ![Kullanıcı Düzenleme Sayfası](./src/assets/readme/kullaniciduzenle.png)
 
-
-
 ---
 ###### Dipnot
 Projenin tasarım kısmında ve projenin içindeki eksiklikler ile ilgili çalışmalara halen devam etmekteyim. Bu kısımları yaptıkça projeyi güncelleyeceğim. 
 
-<!-- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page. -->

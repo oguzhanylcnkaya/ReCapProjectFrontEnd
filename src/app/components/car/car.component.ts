@@ -17,167 +17,149 @@ import { HomeComponent } from '../home/home.component';
 })
 export class CarComponent implements OnInit {
 
-  cars : Car[] = [];
-  car:Car;
+  cars: Car[] = [];
+  car: Car;
   carImageBasePath = "https://localhost:44306/images/";
   carNameFilter = "";
 
   brands: Brand[];
-  brandId:number = 0;
+  brandId: number = 0;
 
-  colors:Color[];
-  colorId:number = 0;
+  colors: Color[];
+  colorId: number = 0;
 
-  showCarRentalAvailable:boolean;
+  showCarRentalAvailable: boolean;
+
+  carsZero: boolean;
 
   constructor(private carService: CarService,
     private activatedRoute: ActivatedRoute,
-    private rentalService:RentalService,
-    private brandService:BrandService,
-    private colorService:ColorService,
-    private router:Router,
-    private toastrService:ToastrService) { }
+    private rentalService: RentalService,
+    private brandService: BrandService,
+    private colorService: ColorService,
+    private router: Router,
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
 
-      this.getBrands();
-      this.getColors();
+    this.getBrands();
+    this.getColors();
 
-      this.activatedRoute.params
-        .subscribe((param) => {
-          
-          if(param["brandId"] && param["colorId"]){
-            this.getCarsByBrandAndColorId(param["brandId"], param["colorId"]);
+    this.activatedRoute.params
+      .subscribe((param) => {
 
-            this.brandId = param['brandId'];
-            this.colorId = param["colorId"];
-          }
-          else if(param["brandId"]){
-            this.getCarsByBrand(param["brandId"]);
-            this.brandId = param['brandId'];
-            this.colorId = 0;
-          }
-          else if(param["colorId"]){
-            this.getCarsByColor(param["colorId"]);
-            this.colorId = param["colorId"];
-            this.brandId = 0;
-          }
-          else{
-            this.getCars();
-          }
+        if (param["brandId"] && param["colorId"]) {
+          this.getCarsByBrandAndColorId(param["brandId"], param["colorId"]);
 
-        });
-      
+          this.brandId = param['brandId'];
+          this.colorId = param["colorId"];
+        }
+        else if (param["brandId"]) {
+          this.getCarsByBrand(param["brandId"]);
+          this.brandId = param['brandId'];
+          this.colorId = 0;
+        }
+        else if (param["colorId"]) {
+          this.getCarsByColor(param["colorId"]);
+          this.colorId = param["colorId"];
+          this.brandId = 0;
+        }
+        else {
+          this.getCars();
+        }
+
+      });
+
   }
 
-  getCars(){
+  getCars() {
     this.carService.getCars()
       .subscribe(response => {
         this.cars = response.data;
       });
   }
 
-  getBrands(){
+  getBrands() {
     this.brandService.getBrands()
       .subscribe((response) => {
         this.brands = response.data;
       })
   }
 
-  getColors(){
+  getColors() {
     this.colorService.getColors()
       .subscribe((response) => {
         this.colors = response.data;
       })
   }
 
-  getCarsByBrand(brandId: number){
+  getCarsByBrand(brandId: number) {
     this.carService.getCarsByBrand(brandId)
       .subscribe((response) => {
         this.cars = response.data;
+
+        this.isHaveaCar();
       });
   }
 
-  getCarsByColor(colorId: number){
+  getCarsByColor(colorId: number) {
     this.carService.getCarsByColor(colorId)
       .subscribe((response) => {
         this.cars = response.data;
+
+        this.isHaveaCar();
       });
   }
 
-  getCarImage(car:Car){
+  getCarImage(car: Car) {
 
-    if(car.imagePath){
+    if (car.imagePath) {
       return car.imagePath
     }
-    else{
+    else {
       return 'default.jpg'
     }
   }
 
-  getCarsByBrandAndColorId(brandId:number, colorId:number){
+  getCarsByBrandAndColorId(brandId: number, colorId: number) {
     this.carService.getCarsByBrandAndColorId(brandId, colorId)
       .subscribe((response) => {
         this.cars = response.data;
+
+        this.isHaveaCar();
       })
   }
 
-  // isCarAvailable(carId:number){
-  //   this.rentalService.isCarAvailable(carId)
-  //     .subscribe((response) => {
-  //       this.showCarRentalAvailable = response;
-  //     })
-      
-  // }
+  getCarById() {
 
-  // getBrandId(){
-
-  //   if(this.brandId == 0){
-  //     this.router.navigate(['/cars'])
-  //   }else{
-  //     this.router.navigate(['/cars/brand/' + this.brandId])
-  //   }
-  // }
-
-  // getColorId(){
-  //   if(this.colorId == 0){
-  //     this.router.navigate(["/cars"])
-  //   }else{
-  //     this.router.navigate(["/cars/color/" + this.colorId])
-  //   }
-  // }
-
-  getCarById(){
-
-    if(this.brandId > 0 && this.colorId > 0){
-      this.router.navigate(['cars/brand/'+ this.brandId +'/color/' + this.colorId])
+    if (this.brandId > 0 && this.colorId > 0) {
+      this.router.navigate(['cars/brand/' + this.brandId + '/color/' + this.colorId])
     }
-    else if(this.brandId >= 0){
-      if(this.brandId == 0){
-        this.router.navigate(['/cars'])
-      }else{
-        this.router.navigate(['/cars/brand/' + this.brandId])
-      }
+    else if (this.brandId > 0 && this.colorId == 0) {
+
+      this.router.navigate(['/cars/brand/' + this.brandId])
+
     }
-    else if(this.colorId >= 0){
-          if(this.colorId == 0){
-            this.router.navigate(["/cars"])
-          }else{
-            this.router.navigate(["/cars/color/" + this.colorId])
-          }
-        }
-      
+    else if (this.colorId > 0 && this.brandId == 0) {
+
+      this.router.navigate(["/cars/color/" + this.colorId])
+
+    }
+    else {
+      this.router.navigate(["/cars"])
+    }
+
   }
 
-  classColorId(id:number){
+  classColorId(id: number) {
     this.colorService.setClassColorId(id);
   }
 
-  getCarByCarId(id:number){
+  getCarByCarId(id: number) {
     return this.carService.getCarById(id);
   }
 
-  deleteCar(id:number){
+  deleteCar(id: number) {
     this.getCarByCarId(id)
       .subscribe((response) => {
         this.car = response.data;
@@ -188,5 +170,11 @@ export class CarComponent implements OnInit {
             this.ngOnInit();
           })
       })
+  }
+
+  isHaveaCar() {
+    if (this.cars.length == 0) {
+      this.carsZero = true;
+    }
   }
 }

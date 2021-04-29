@@ -14,6 +14,12 @@ export class UserService {
   apiUrl = "https://localhost:44306/api/users/"
   constructor(private httpClient:HttpClient) { }
 
+  getAll():Observable<ListResponseModel<User>>{
+    let newApiUrl = this.apiUrl + "getall";
+
+    return this.httpClient.get<ListResponseModel<User>>(newApiUrl);
+  }
+
   getUserByEmail(email:string){
     let newApiUrl = this.apiUrl + "getuserbyemail?email=" +email;
 

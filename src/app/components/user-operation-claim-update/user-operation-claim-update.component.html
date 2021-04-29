@@ -1,0 +1,36 @@
+<app-section-background
+data="Kullanıcı Rolü Düzenleme Sayfası"
+>
+</app-section-background>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="userOperationClaimUpdateForm">
+                <div class="form-group">
+                    <label for="">Kullanıcı Adı ve Soyadı</label>
+                    <select 
+                    [(ngModel)]="userOperationClaim.userId"
+                    formControlName="userId"
+                    class="form-select form-control" name="userId" id="userId">
+                        <option *ngFor="let user of users" [value]="user.id">{{user.firstName + " " + user.lastName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Kullanıcı Rolü</label>
+                    <select 
+                    [(ngModel)]="userOperationClaim.operationClaimId"
+                    formControlName="operationClaimId"
+                    class="form-select form-control" name="operationClaimId" id="operationClaimId">
+                        <option *ngFor="let operationClaim of operationClaims" [value]="operationClaim.id">{{operationClaim.name}}</option>
+                    </select>
+                </div>
+                <button 
+                (click)="update()"
+                class="btn btn-outline-primary">
+                    Güncelle
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

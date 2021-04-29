@@ -21,6 +21,9 @@ import { PaymentComponent } from './components/payment/payment.component';
 
 import { RentalAddComponent } from './components/rental-add/rental-add.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { UserOperationClaimAddComponent } from './components/user-operation-claim-add/user-operation-claim-add.component';
+import { UserOperationClaimUpdateComponent } from './components/user-operation-claim-update/user-operation-claim-update.component';
+import { UserOperationClaimComponent } from './components/user-operation-claim/user-operation-claim.component';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
@@ -54,7 +57,11 @@ const routes: Routes = [
 
   {path:"operationClaim", component:OperationClaimComponent},
   {path:"operationClaim/add", component:OperationClaimAddComponent},
-  {path: "operationClaim/update/:id", component:OperationClaimUpdateComponent}
+  {path: "operationClaim/update/:id", component:OperationClaimUpdateComponent},
+
+  {path: "userOperationClaim", component: UserOperationClaimComponent},
+  {path: "userOperationClaim/add", component: UserOperationClaimAddComponent},
+  {path: "userOperationClaim/update/:id", component: UserOperationClaimUpdateComponent}
 
 ];
 
